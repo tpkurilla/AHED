@@ -1,0 +1,251 @@
+Dosimeter Group
+    Dosimeter Descriptions
+=========================================
+"Whole Body Dosimeter - 1 Piece"
+    "1 piece ID - whole body"
+
+"Whole Body Dosimeter - 2 Piece"
+    "2 piece ID - lower body"
+    "2 piece ID - upper body"
+
+"Whole Body Dosimeter - 3 Piece"
+    "3 piece ID - arms"
+    "3 piece ID - torso"
+    "3 piece ID - legs"
+
+"Whole Body Dosimeter - 4 Piece 2 Torso"
+    "4 piece ID (torso) - arms"
+    "4 piece ID (torso) - front torso"
+    "4 piece ID (torso) - rear torso"
+    "4 piece ID (torso) - legs"
+
+"Whole Body Dosimeter - 4 Piece 2 Legs"
+    "4 piece ID (legs) - arms"
+    "4 piece ID (legs) - whole torso"
+    "4 piece ID (legs) - lower legs"
+    "4 piece ID (legs) - upper legs"
+
+"Whole Body Dosimeter - 5 Piece"
+    "5 piece ID - arms"
+    "5 piece ID - front torso"
+    "5 piece ID - rear torso"
+    "5 piece ID - lower legs"
+    "5 piece ID - upper legs"
+
+"Whole Body Dosimeter - 6 Piece"
+    "6 piece ID - lower arms"
+    "6 piece ID - upper arms"
+    "6 piece ID - front torso"
+    "6 piece ID - rear torso"
+    "6 piece ID - lower legs"
+    "6 piece ID - upper legs"
+
+"Face and neck wipes"
+    "Swab - detergent water"
+    "Swab - organic solvent"
+    "Swab - water"
+
+"Head patches"
+    "Patch (inner) on hat"
+    "Patch (outer) on hat"
+
+"Hand Dosimeters"
+    "Hand wash - detergent water"
+    "Hand wash - organic solvent"
+    "Hand wash - water"
+
+"Feet Dosimeters"
+    "Socks"
+
+"Inhalation Dosimeters"
+    "OVS front section"
+    "OVS back section"
+    "OVS whole matrix"
+    "Glass fiber filter front section"
+    "Glass fiber filter back section"
+    "Glass fiber filter whole matrix"
+
+"Field Fortification Dosimeters"
+    "Inner dosimeter (FF)"
+    "Outer dosimeter (FF)"
+    "Patch (outer) on hat (FF)"
+    "Patch (inner) on hat (FF)"
+    "Face/neck swab - detergent water (FF)"
+    "Face/neck swab - organic solvent (FF)"
+    "Face/neck swab - water (FF)"
+    "Socks (FF)"
+    "Hand wash - detergent water (FF)"
+    "Hand wash - organic solvent (FF)"
+    "Hand wash - water (FF)"
+    "Inhalation - OVS (FF)"
+    "Inhalation - glass fiber filter (FF)"
+
+
+
+
+
+Dosimeter Group
+    PPE Body Parts
+=========================================
+"Whole Body Dosimeter - 1 Piece"
+"Whole Body Dosimeter - 2 Piece"
+"Whole Body Dosimeter - 3 Piece"
+"Whole Body Dosimeter - 4 Piece 2 Torso"
+"Whole Body Dosimeter - 4 Piece 2 Legs"
+"Whole Body Dosimeter - 5 Piece"
+"Whole Body Dosimeter - 6 Piece"
+    "Upper body"
+    "Lower body"
+    "Whole body"
+
+"Face and neck wipes"
+
+"Head patches"
+
+"Hand Dosimeters"
+    "Hands"
+
+"Feet Dosimeters"
+
+"Inhalation Dosimeters"
+
+"Field Fortification Dosimeters"
+
+
+
+
+Dosimeter Group
+    Layer Body Parts
+=========================================
+"Whole Body Dosimeter - 1 Piece"
+"Whole Body Dosimeter - 2 Piece"
+"Whole Body Dosimeter - 3 Piece"
+"Whole Body Dosimeter - 4 Piece 2 Torso"
+"Whole Body Dosimeter - 4 Piece 2 Legs"
+"Whole Body Dosimeter - 5 Piece"
+"Whole Body Dosimeter - 6 Piece"
+    "Upper body"
+    "Lower body"
+    "Whole body"
+
+"Face and neck wipes"
+    "Face/Neck"
+
+"Head patches"
+    "Head"
+
+"Hand Dosimeters"
+    "Hands"
+
+"Feet Dosimeters"
+    "Feet"
+
+"Inhalation Dosimeters"
+
+"Field Fortification Dosimeters"
+
+
+
+
+Body Parts
+    Clothing
+=========================================
+"Upper body"
+    "Reflective saftey vest"
+    "Cloth long sleeved shirt"
+    "Cloth short sleeved shirt"
+    "Cloth jacket"
+    "CR apron"
+    "CR apron worn for back protection"
+    "Tyvek Jacket (with hood)"
+    "Tyvek Jacket (without hood)"
+    "CR Jacket (rainsuit) (without hood)"
+    "CR Jacket (rainsuit) (with hood)"
+
+"Lower body"
+    "Chaps or snake leggings"
+    "Cloth pants - long"
+    "Cloth pants - short"
+    "Tyvek pants"
+    "CR (rainsuit) pants"
+
+"Whole body"
+    "Cloth coveralls"
+    "Tyvek coveralls - without hood"
+    "Tyvek coveralls - with hood"
+
+"Face/Neck"
+    "Dust/mist mask"
+    "Quarter face - mask respirator"
+    "Full face - respirator"
+    "Eyeglasses or sunglasses"
+    "Protective eyewear"
+    "Goggles"
+    "Face Shield"
+
+"Head"
+    "Hat or Cap"
+    "Cloth Bandana (head scarf)"
+    "Cloth Bandana (neck scarf)"
+    "CR hat ('rain hat')"
+    "CR hood"
+
+"Hands"
+    "Non-CR Gloves"
+    "CR Gloves"
+
+"Feet"
+    "Shoes/boots over socks"
+    "CR boots over socks"
+    "CR boots over shoes/boots over socks"
+
+"Inhalation"
+
+
+
+
+Dosimeter Group
+    Dosimeter Matrices
+=========================================
+"Whole Body Dosimeter - 1 Piece"
+"Whole Body Dosimeter - 2 Piece"
+"Whole Body Dosimeter - 3 Piece"
+"Whole Body Dosimeter - 4 Piece 2 Torso"
+"Whole Body Dosimeter - 4 Piece 2 Legs"
+"Whole Body Dosimeter - 5 Piece"
+"Whole Body Dosimeter - 6 Piece"
+    "100% cotton"
+    "Cotton / polyester blend"
+
+"Face and neck wipes"
+    "100% cotton gauze"
+    "4 mL of 0.01% v/v AOT solution"
+
+"Head patches"
+    "100% cotton patch"
+    "Patch - other"
+
+"Hand Dosimeters"
+    "4 mL of 0.01% v/v AOT solution"
+
+"Feet Dosimeters"
+    "85% cotton, 15% nylon"
+
+"Inhalation Dosimeters"
+    "Glass fiber filter"
+    "Sorbent"
+
+"Field Fortification Dosimeters"
+    "100% cotton"
+    "Cotton / polyester blend"
+    "100% cotton gauze"
+    "4 mL of 0.01% v/v AOT solution"
+    "100% cotton patch"
+    "Patch - other"
+    "85% cotton, 15% nylon"
+    "Glass fiber filter"
+    "Sorbent"
+
+
+
+

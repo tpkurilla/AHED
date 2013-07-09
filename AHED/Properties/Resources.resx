@@ -1,0 +1,524 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApplicationInfo_Invalid_AreaTreated" xml:space="preserve">
+    <value>Area treated must be &gt; 0</value>
+    <comment>If area treated is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_BandWidth" xml:space="preserve">
+    <value>Band width must be &gt; 0</value>
+    <comment>If band width is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_BoomHeight" xml:space="preserve">
+    <value>Boom height must be &gt; 0</value>
+    <comment>If boom height is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_BoomWidth" xml:space="preserve">
+    <value>Boom width must be &gt; 0</value>
+    <comment>If boom width is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_Cleanup" xml:space="preserve">
+    <value>Unknown Cleanup</value>
+    <comment>Cleanup must be one of the values in the Static Values Reporting table.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_CropHeight" xml:space="preserve">
+    <value>Crop height must be &gt;= 0</value>
+    <comment>If a crop height is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_Depth" xml:space="preserve">
+    <value>Depth must be &gt; 0</value>
+    <comment>If depth is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_Diluent" xml:space="preserve">
+    <value>Unknown Diluent</value>
+    <comment>Diluent must be one of the values in the Static Values Diluent table.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_DiskSize" xml:space="preserve">
+    <value>Disk size must be &gt; 0</value>
+    <comment>If disk size if provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_Engineering_Controls" xml:space="preserve">
+    <value>Unknown Application Engineering Controls</value>
+    <comment>Engineering Controls must be one of the values in the Static Values AppEngControls table.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_Equipment_Used" xml:space="preserve">
+    <value>Unknown Equipment Used</value>
+    <comment>Equipment Used must be one of the values in the Static Values AppEquipment table.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_Foliage_Density" xml:space="preserve">
+    <value>Unknown Foliage Density</value>
+    <comment>Foliage Density must be one of the values in the Static Values Foliage table.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_GroundSpeed" xml:space="preserve">
+    <value>Gound speed must be &gt; 0</value>
+    <comment>If ground speed is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_HopperCapacity" xml:space="preserve">
+    <value>Hopper capacity must be &gt; 0</value>
+    <comment>If hopper capacity is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_Humidity" xml:space="preserve">
+    <value>Humidity must be between 0 and 100 percent</value>
+    <comment>If a humidty value is provided, it must be between 0 and 100 percent.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_HumidityBetween" xml:space="preserve">
+    <value>Humidity must be between the min and max</value>
+    <comment>If a humidity is provided, it must be between the minimum and maximum provided.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_HumidityMax" xml:space="preserve">
+    <value>Humidity Max must be between 0 and 100 percent</value>
+    <comment>If a humidty value is provided, it must be between 0 and 100 percent.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_HumidityMaxMin" xml:space="preserve">
+    <value>Humidity Max must be &gt;= Humidity Min</value>
+    <comment>If a maximum humidity is provided, it must be greater than or equal to the minimum provided.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_HumidityMin" xml:space="preserve">
+    <value>Humidity Min must be between 0 and 100 percent</value>
+    <comment>If a humidty value is provided, it must be between 0 and 100 percent.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_HumidityMinMax" xml:space="preserve">
+    <value>Humidty Min must be less than or equal to Humidity Max</value>
+    <comment>If a minimum humidity is provided, it must be less than or equal to the maximum provided.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_NozzlePressure" xml:space="preserve">
+    <value>Nozzle pressure must be &gt; 0</value>
+    <comment>If nozzle pressure is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_NumberOfNozzles" xml:space="preserve">
+    <value>Number of nozzles must be &gt; 0</value>
+    <comment>If number of nozzles is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_Repairs" xml:space="preserve">
+    <value>Unknown Repairs</value>
+    <comment>Repairs must be one of the values in the Static Values Reporting table.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_SpacingBetweenRows" xml:space="preserve">
+    <value>Spacing between rows must be &gt; 0</value>
+    <comment>If spacing is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_SprayerTankVolume" xml:space="preserve">
+    <value>Sprayer tank volume must be &gt; 0</value>
+    <comment>If spayer tank volume is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_SwathWidth" xml:space="preserve">
+    <value>Swath width must be &gt; 0</value>
+    <comment>If swath width is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_Temperature" xml:space="preserve">
+    <value>Temperature must be between -50 C and +130 C</value>
+    <comment>If a temperature is provided, it must be between -50 and 130 degrees Fahrenheit.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_TemperatureBetween" xml:space="preserve">
+    <value>Temperature must be between Temperature Min and Max</value>
+    <comment>If a temperature is provided, it must be between the temperature min and max provided.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_TemperatureMax" xml:space="preserve">
+    <value>Temperature Max must be between -50 C and +130 C</value>
+    <comment>If a temperature is provided, it must be between -50 and 130 degrees Fahrenheit.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_TemperatureMaxMin" xml:space="preserve">
+    <value>Temperature Max must be &gt;= Temperature Min</value>
+    <comment>If a maximum temperature is provided, it must be greater than or equal to the minimum provided.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_TemperatureMin" xml:space="preserve">
+    <value>Temperature Min must be between -50 C and +130 C</value>
+    <comment>If a temperature is provided, it must be between -50 and 130 degrees Fahrenheit.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_TemperatureMinMax" xml:space="preserve">
+    <value>Temperature Min must be &lt; Temperature Max</value>
+    <comment>If a temperature minimum is provided, it must be less than the provided temperature maximum.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_TotalAiApplied" xml:space="preserve">
+    <value>Total AI applied must be null or &gt; 0</value>
+    <comment>If total AI applied is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_TotalLoadsApplied" xml:space="preserve">
+    <value>Total loads applied must be null or &gt; 0</value>
+    <comment>If total loads applied is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_TotalSprayApplied" xml:space="preserve">
+    <value>Total spray applied must be null or &gt; 0</value>
+    <comment>If total spray applied is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_WindSpeed" xml:space="preserve">
+    <value>Wind speed must be &gt;= 0</value>
+    <comment>If a wind speed is provided, it must be greater than or equal to zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_WindSpeedBetween" xml:space="preserve">
+    <value>Wind speed must be between Wind Speed Min and Max</value>
+    <comment>If wind speed is provded, it must be between the wind speed min and max provided.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_WindSpeedMax" xml:space="preserve">
+    <value>Wind speed max must be &gt;= 0</value>
+    <comment>If a wind speed max is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_WindSpeedMaxMin" xml:space="preserve">
+    <value>Wind speed max must be &gt;= Wind speed min</value>
+    <comment>If a maximum wind speed is provided, it must be greater than or equal to the minimum provided.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_WindSpeedMin" xml:space="preserve">
+    <value>Wind speed min must be &gt;= 0</value>
+    <comment>If a wind speed min is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="ApplicationInfo_Invalid_WindSpeedMinMax" xml:space="preserve">
+    <value>Wind speed min must be &lt;= Wind speed max</value>
+    <comment>If minimum wind speed is provided, it must be less than or equal to the maximum provided.</comment>
+  </data>
+  <data name="Local_Database_Path" xml:space="preserve">
+    <value>C:\AHEDDatabase\</value>
+    <comment>Location of the local database files.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_Cleanup" xml:space="preserve">
+    <value>Unknown Cleanup</value>
+    <comment>Cleanup must be one of the values in the Static Values Reporting table.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_Diluent" xml:space="preserve">
+    <value>Unknown Diluent</value>
+    <comment>Diluent must be one of the values in the Static Values Diluent table.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_Equipment_Loaded" xml:space="preserve">
+    <value>Unknown Equipment Loaded</value>
+    <comment>Equipment Loaded must be one of the values in the Static Values Equipment Loaded table.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_FinalSprayVolumeMixed" xml:space="preserve">
+    <value>Final spray volume mixed must be &gt; 0</value>
+    <comment>If a final spray volume mixed is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_HopperCapacity" xml:space="preserve">
+    <value>Hopper capacity must be &gt; 0</value>
+    <comment>If a capacity is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_Humidity" xml:space="preserve">
+    <value>Humidity must be between 0 and 100 percent</value>
+    <comment>If a humidty value is provided, it must be between 0 and 100 percent.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_HumidityBetween" xml:space="preserve">
+    <value>Humidity must be between the min and max</value>
+    <comment>If a humidity is provided, it must be between the minimum and maximum provided.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_HumidityMax" xml:space="preserve">
+    <value>Humidity Max must be between 0 and 100 percent</value>
+    <comment>If a humidty value is provided, it must be between 0 and 100 percent.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_HumidityMaxMin" xml:space="preserve">
+    <value>Humidty Max must be greater than or equal to Humidity Min</value>
+    <comment>If a maximum humidity is provided, it must be greater than or equal to the minimum provided.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_HumidityMin" xml:space="preserve">
+    <value>Humidity Min must be between 0 and 100 percent</value>
+    <comment>If a humidty value is provided, it must be between 0 and 100 percent.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_HumidityMinMax" xml:space="preserve">
+    <value>Humidty Min must be less than or equal to Humidity Max</value>
+    <comment>If a minimum humidity is provided, it must be less than or equal to the maximum provided.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_MixLoad_Eng_Controls" xml:space="preserve">
+    <value>Unknown Mixing/Loading Engineering Controls</value>
+    <comment>Mixing/Loading Engineering Controls must be one of the values in the Static Values MixLoadEngControls table.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_PremixTankCapacity" xml:space="preserve">
+    <value>Premix tank capacity must be &gt; 0</value>
+    <comment>If a capacity is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_Repairs" xml:space="preserve">
+    <value>Unknown Repairs</value>
+    <comment>Repairs must be one of the values in the Static Values Reporting table.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_Setup_Equipment" xml:space="preserve">
+    <value>Unknown Mixing Setup Equipment</value>
+    <comment>Mixing Setup Equipment must be one of the values in the Static Values MixingSetupEquipment table.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_SprayerTankCapacity" xml:space="preserve">
+    <value>Sprayer tank capacity must be &gt; 0</value>
+    <comment>If a capacity is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_Temperature" xml:space="preserve">
+    <value>Temperature Min must be between -50 C and +130 C, and between Temperature Min and  Temperature Max</value>
+    <comment>If a temperature is provided, it must be between -50 and 130 degrees Fahrenheit.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_TemperatureBetween" xml:space="preserve">
+    <value>Temperature must be between Temperature Min and Max</value>
+    <comment>If a temperature is provided, it must be between the temperature min and max provided.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_TemperatureMax" xml:space="preserve">
+    <value>Temperature Max must be between -50 C and +130 C</value>
+    <comment>If a temperature is provided, it must be between -50 and 130 degrees Fahrenheit.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_TemperatureMaxMin" xml:space="preserve">
+    <value>Temperature Max must be &gt;= Temperature Min</value>
+    <comment>If a maximum temperature is provided, it must be greater than or equal to the minimum provided.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_TemperatureMin" xml:space="preserve">
+    <value>Temperature Min must be between -50 C and +130 C</value>
+    <comment>If a temperature is provided, it must be between -50 and 130 degrees Fahrenheit.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_TemperatureMinMax" xml:space="preserve">
+    <value>Temperature Min must be &lt;= Temperature Max</value>
+    <comment>If a temperature minimum is provided, it must be less than the provided temperature maximum.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_TotalAiMixed" xml:space="preserve">
+    <value>Total AI mixed must be &gt; 0</value>
+    <comment>If a mass is provided, it must be greater than zero.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_Total_Loads_Mixed" xml:space="preserve">
+    <value>Total Loads Mixed must be empty, or a positive number.</value>
+    <comment>Total Loads Mixed must be empty, or a positive integer.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_WindSpeed" xml:space="preserve">
+    <value>Wind Speed must be between 0 and 100 mph, and between Wind MIn and Wind Max</value>
+    <comment>If a speed is provided, it must be between 0 and 100 mph.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_WindSpeedBetween" xml:space="preserve">
+    <value>Wind speed must be between Wind Speed Min and Max</value>
+    <comment>If wind speed is provded, it must be between the wind speed min and max provided.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_WindSpeedMax" xml:space="preserve">
+    <value>Wind Max must be between 0 and 100 mph, and greater than or equal to Wind Min</value>
+    <comment>If a speed is provided, it must be between 0 and 100 mph.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_WindSpeedMaxMin" xml:space="preserve">
+    <value>Wind speed max must be &gt;= Wind speed min</value>
+    <comment>If a maximum wind speed is provided, it must be greater than or equal to the minimum provided.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_WindSpeedMin" xml:space="preserve">
+    <value>Wind Min must be between 0 and 100 mph, and less than or equal to Wind Max</value>
+    <comment>If a speed is provided, it must be between 0 and 100 mph.</comment>
+  </data>
+  <data name="MixingInfo_Invalid_WindSpeedMinMax" xml:space="preserve">
+    <value>Wind speed min must be &lt;= Wind speed max</value>
+    <comment>If minimum wind speed is provided, it must be less than or equal to the maximum provided.</comment>
+  </data>
+  <data name="ProductInfo_Invalid_Action_of_Pesticide" xml:space="preserve">
+    <value>Unknown Action of Pesticide</value>
+    <comment>Action of Pesticide must be one of the values in the Static Values Pesticide table.</comment>
+  </data>
+  <data name="ProductInfo_Invalid_AI_Mass_per_Volume" xml:space="preserve">
+    <value>AI Mass per Volume must be empty or &gt; 0</value>
+    <comment>AI Mass per Volume must be empty or &gt; 0.</comment>
+  </data>
+  <data name="ProductInfo_Invalid_Formulation" xml:space="preserve">
+    <value>Unknown Formulation</value>
+    <comment>Formulation must be one of the values in the Static Values Formulation table.</comment>
+  </data>
+  <data name="ProductInfo_Invalid_Package" xml:space="preserve">
+    <value>Unknown Package</value>
+    <comment>Package must be one of the values in the Static Values Package table.</comment>
+  </data>
+  <data name="ProductInfo_Invalid_Package_Volume" xml:space="preserve">
+    <value>Package Volume must be empty or &gt; 0</value>
+    <comment>Package Volume must be empty or &gt; 0.</comment>
+  </data>
+  <data name="ProductInfo_Invalid_Package_Weight" xml:space="preserve">
+    <value>Package Weight must be empty or &gt; 0</value>
+    <comment>Package Weight must be empty or &gt; 0.</comment>
+  </data>
+  <data name="ProductInfo_Invalid_Percentage_AI_by_Weight" xml:space="preserve">
+    <value>Percentage AI by Weight must be empty or &gt; 0</value>
+    <comment>Percentage AI by Weight must be empty or &gt; 0.</comment>
+  </data>
+  <data name="ProductInfo_Invalid_Vapor_Pressure" xml:space="preserve">
+    <value>Vapor Pressure must be empty or &gt; 0</value>
+    <comment>Vapor Pressure must be empty or &gt; 0.</comment>
+  </data>
+  <data name="ProductInfo_Invalid_Vapor_Pressure_at_C" xml:space="preserve">
+    <value>Vapor Pressure at C must be empty or &gt; 0</value>
+    <comment>.</comment>
+  </data>
+  <data name="Server_DataManager_EndPoint" xml:space="preserve">
+    <value>datamanagerservicesite/DataManager.svc</value>
+    <comment>Service end-point for Data Manager</comment>
+  </data>
+  <data name="Server_IP" xml:space="preserve">
+    <value>54.225.65.147</value>
+    <comment>IP Location for the main server</comment>
+  </data>
+  <data name="Server_Transport" xml:space="preserve">
+    <value>http:</value>
+    <comment>Transport to use for server</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Age" xml:space="preserve">
+    <value>Age must be either empty, or between 10 and 127 (years)</value>
+    <comment>If an age is provided, it must be between 10 and 127 years.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Biomonitoring" xml:space="preserve">
+    <value>Bio Monitoring must either be empty, or a valid description</value>
+    <comment>Bio Monitoring must either be empty, or a valid description.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Country" xml:space="preserve">
+    <value>Unknown Country</value>
+    <comment>Country must match one of the values in the Static Values Country table.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_County_Locale" xml:space="preserve">
+    <value>County / Locale must be either empty, or valid for the State or Province specified</value>
+    <comment>County / Locale must be either empty, or valid for the State or Province specified.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Employment" xml:space="preserve">
+    <value>Unknown Employment</value>
+    <comment>Employment must match one of the values in Static Values Employment table.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Gender" xml:space="preserve">
+    <value>Gender must be either empty, or "Male", or "Female"</value>
+    <comment>If a gender is provided, it must be one of the listed values.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Height" xml:space="preserve">
+    <value>Height must be either empty, or between {0} and {1} ({2})</value>
+    <comment>If a height is provided, it must be within valid range for the specified unit system.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Replicate_Date" xml:space="preserve">
+    <value>Replicate Date must be provided</value>
+    <comment>The Replicate Date is initialized to the date of entry, but must be changed to the actual Replicate Date.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Season" xml:space="preserve">
+    <value>Unknown Season</value>
+    <comment>Season must match one of the values in the Static Values Season table.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Site" xml:space="preserve">
+    <value>Unknown Site</value>
+    <comment>Site must match one of the values in Static Values Sites table.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_State_Province" xml:space="preserve">
+    <value>State or Province must be either empty, or valid for the Country specified</value>
+    <comment>State or Province must be either empty, or valid for the Country specified.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Task" xml:space="preserve">
+    <value>Unknown Task</value>
+    <comment>Task must be specifically set.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Town" xml:space="preserve">
+    <value>Town must be either empty, or valid for the county / locale specified</value>
+    <comment>Town must be either empty, or valid for the county / locale specified.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Weight" xml:space="preserve">
+    <value>Weight must be either empty, or between {0} and {1} ({2})</value>
+    <comment>If a weight is provided, it must be within valid range for the specified unit system.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Years_Experience" xml:space="preserve">
+    <value>Years of Experience must be either empty, or a positive integer</value>
+    <comment>If years of experience if provided, it must be an integer.</comment>
+  </data>
+  <data name="WorkerInfo_Missing_Id" xml:space="preserve">
+    <value>Worker ID must be provided</value>
+    <comment>Worker Id is a required field used as part of the key of a Monitoring Unit.</comment>
+  </data>
+  <data name="WorkerInfo_Missing_Replicate_Id" xml:space="preserve">
+    <value>Replicate ID must be provided</value>
+    <comment>Replicate Id is a require field used as part of the key of a Monitoring Unit.</comment>
+  </data>
+</root>
