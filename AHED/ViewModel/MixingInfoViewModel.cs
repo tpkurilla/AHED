@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AHED.Model;
 using AHED.Types;
 
@@ -74,133 +70,32 @@ namespace AHED.ViewModel
             SetupEquipment = mixingInfo.SetupEquipment;
             Diluent = mixingInfo.Diluent;
             Additives = mixingInfo.Additives;
-
-            if (mixingInfo.PremixTankCapacity == null)
-            {
-                PremixTankCapacity = String.Empty;
-                PremixTankCapacityUnits = Volume.DisplayUnits;
-            }
-            else
-            {
-                PremixTankCapacity = mixingInfo.PremixTankCapacity.ToString();
-                PremixTankCapacityUnits = mixingInfo.PremixTankCapacity.OriginalUnits;
-            }
-
-            if (mixingInfo.SprayerTankCapacity == null)
-            {
-                SprayerTankCapacity = String.Empty;
-                SprayerTankCapacityUnits = Volume.DisplayUnits;
-            }
-            else
-            {
-                SprayerTankCapacity = mixingInfo.SprayerTankCapacity.ToString();
-                SprayerTankCapacityUnits = Volume.DisplayUnits;
-            }
-
-            if (mixingInfo.HopperCapacity == null)
-            {
-                HopperCapacity = String.Empty;
-                HopperCapacityUnits = Volume.DisplayUnits;
-            }
-            else
-            {
-                HopperCapacity = mixingInfo.HopperCapacity.ToString();
-                HopperCapacityUnits = mixingInfo.HopperCapacity.OriginalUnits;
-            }
-
-            TotalLoadsMixed = mixingInfo.TotalLoadsMixed.HasValue ? mixingInfo.TotalLoadsMixed.ToString() : String.Empty;
-
-            if (mixingInfo.TotalAiMixed == null)
-            {
-                TotalAiMixed = String.Empty;
-                TotalAiMixedUnits = Mass.DisplayUnits;
-            }
-            else
-            {
-                TotalAiMixed = mixingInfo.TotalAiMixed.ToString();
-                TotalAiMixedUnits = mixingInfo.TotalAiMixed.OriginalUnits;
-            }
-
-            if (mixingInfo.FinalSprayVolumeMixed == null)
-            {
-                FinalSprayVolumeMixed = String.Empty;
-                FinalSprayVolumeMixedUnits = Volume.DisplayUnits;
-            }
-            else
-            {
-                FinalSprayVolumeMixed = mixingInfo.FinalSprayVolumeMixed.ToString();
-                FinalSprayVolumeMixedUnits = mixingInfo.FinalSprayVolumeMixed.OriginalUnits;
-            }
-
-            HumidityMax = mixingInfo.HumidityMax.HasValue ? mixingInfo.HumidityMax.ToString() : String.Empty;
-            HumidityMin = mixingInfo.HumidityMin.HasValue ? mixingInfo.HumidityMin.ToString() : String.Empty;
-            Humidity = mixingInfo.Humidity.HasValue ? mixingInfo.Humidity.ToString() : String.Empty;
-
-            if (mixingInfo.TemperatureMax == null)
-            {
-                TemperatureMax = String.Empty;
-                TemperatureMaxUnits = Types.Temperature.DisplayUnits;
-            }
-            else
-            {
-                TemperatureMax = mixingInfo.TemperatureMax.ToString();
-                TemperatureMaxUnits = mixingInfo.TemperatureMax.OriginalUnits;
-            }
-
-            if (mixingInfo.TemperatureMin == null)
-            {
-                TemperatureMin = String.Empty;
-                TemperatureMinUnits = Types.Temperature.DisplayUnits;
-            }
-            else
-            {
-                TemperatureMin = mixingInfo.TemperatureMin.ToString();
-                TemperatureMinUnits = mixingInfo.TemperatureMin.OriginalUnits;
-            }
-
-            if (mixingInfo.Temperature == null)
-            {
-                Temperature = String.Empty;
-                TemperatureUnits = Types.Temperature.DisplayUnits;
-            }
-            else
-            {
-                Temperature = mixingInfo.Temperature.ToString();
-                TemperatureUnits = mixingInfo.Temperature.OriginalUnits;
-            }
-
-            if (mixingInfo.WindSpeedMax == null)
-            {
-                WindSpeedMax = String.Empty;
-                WindSpeedMaxUnits = Velocity.DuMphOrKph;
-            }
-            else
-            {
-                WindSpeedMax = mixingInfo.WindSpeedMax.ToString();
-                WindSpeedMaxUnits = mixingInfo.WindSpeedMax.OriginalUnits;
-            }
-
-            if (mixingInfo.WindSpeedMin == null)
-            {
-                WindSpeedMin = String.Empty;
-                WindSpeedMinUnits = Velocity.DuMphOrKph;
-            }
-            else
-            {
-                WindSpeedMin = mixingInfo.WindSpeedMin.ToString();
-                WindSpeedMinUnits = mixingInfo.WindSpeedMin.OriginalUnits;
-            }
-
-            if (mixingInfo.WindSpeed == null)
-            {
-                WindSpeed = String.Empty;
-                WindSpeedUnits = Velocity.DuMphOrKph;
-            }
-            else
-            {
-                WindSpeed = mixingInfo.WindSpeed.ToString();
-                WindSpeedUnits = mixingInfo.WindSpeed.OriginalUnits;
-            }
+            PremixTankCapacity = mixingInfo.PremixTankCapacity;
+            PremixTankCapacityUnits = mixingInfo.PremixTankCapacityUnits;
+            SprayerTankCapacity = mixingInfo.SprayerTankCapacity;
+            SprayerTankCapacityUnits = mixingInfo.PremixTankCapacityUnits;
+            HopperCapacity = mixingInfo.HopperCapacity;
+            HopperCapacityUnits = mixingInfo.HopperCapacityUnits;
+            TotalLoadsMixed = mixingInfo.TotalLoadsMixed;
+            TotalAiMixed = mixingInfo.TotalAiMixed;
+            TotalAiMixedUnits = mixingInfo.TotalAiMixedUnits;
+            FinalSprayVolumeMixed = mixingInfo.FinalSprayVolumeMixed;
+            FinalSprayVolumeMixedUnits = mixingInfo.FinalSprayVolumeMixedUnits;
+            HumidityMax = mixingInfo.HumidityMax;
+            HumidityMin = mixingInfo.HumidityMin;
+            Humidity = mixingInfo.Humidity;
+            TemperatureMax = mixingInfo.TemperatureMax;
+            TemperatureMaxUnits = mixingInfo.TemperatureMaxUnits;
+            TemperatureMin = mixingInfo.TemperatureMin;
+            TemperatureMinUnits = mixingInfo.TemperatureMinUnits;
+            Temperature = mixingInfo.Temperature;
+            TemperatureUnits = mixingInfo.TemperatureUnits;
+            WindSpeedMax = mixingInfo.WindSpeedMax;
+            WindSpeedMaxUnits = mixingInfo.WindSpeedMaxUnits;
+            WindSpeedMin = mixingInfo.WindSpeedMin;
+            WindSpeedMinUnits = mixingInfo.WindSpeedMinUnits;
+            WindSpeed = mixingInfo.WindSpeed;
+            WindSpeedUnits = mixingInfo.WindSpeedUnits;
         }
 
         #endregion // Constructor
@@ -630,6 +525,7 @@ namespace AHED.ViewModel
                 if (value != _premixTankCapacityUnits)
                 {
                     _premixTankCapacityUnits = value;
+                    _mixingInfo.PremixTankCapacityUnits = value;
                     base.OnPropertyChanged(MixingInfoModel.PREMIX_TANK_CAPACITY_UNITS);
                     base.OnPropertyChanged(MixingInfoModel.PREMIX_TANK_CAPACITY);
                 }
@@ -680,7 +576,7 @@ namespace AHED.ViewModel
         }
 
         private Volume.Units _hopperCapacityUnits;
-        public Volume.Units HopperTankCapacityUnits
+        public Volume.Units HopperCapacityUnits
         {
             get { return _hopperCapacityUnits; }
             set

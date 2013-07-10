@@ -51,9 +51,10 @@ namespace AHED.Model
             get { return _workerInfo.ReplicateId; }
             set
             {
-                if (_workerInfo.ReplicateId != value && ValidateReplicateId(value))
+                if (value != _workerInfo.ReplicateId)
                 {
-                    _workerInfo.ReplicateId = value;
+                    if (ValidateReplicateId(value))
+                        _workerInfo.ReplicateId = value;
                 }
             }
         }
@@ -63,15 +64,15 @@ namespace AHED.Model
             get { return _workerInfo.Task; }
             set
             {
-                if (_workerInfo.Task != value &&  ValidateTask(value))
+                if (value != _workerInfo.Task)
                 {
-                    _workerInfo.Task = value;
+                    if (ValidateTask(value))
+                        _workerInfo.Task = value;
                 }
             }
         }
 
         private string _ageText;
-
         public string Age
         {
             get { return _ageText; }
@@ -210,10 +211,10 @@ namespace AHED.Model
             get { return _workerInfo.Employment; }
             set
             {
-                if (_workerInfo.Employment != value)
+                if (value != _workerInfo.Employment)
                 {
-                    ValidateEmployment(value);
-                    _workerInfo.Employment = value;
+                    if (ValidateEmployment(value))
+                        _workerInfo.Employment = value;
                 }
             }
         }
@@ -225,8 +226,8 @@ namespace AHED.Model
             {
                 if (value !=_workerInfo.Biomonitoring)
                 {
-                    ValidateBiomonitoring(value);
-                    _workerInfo.Biomonitoring = value;
+                    if (ValidateBiomonitoring(value))
+                        _workerInfo.Biomonitoring = value;
                 }
             }
         }
@@ -295,8 +296,8 @@ namespace AHED.Model
             {
                 if (_workerInfo.StateProvince != value)
                 {
-                    ValidateStateProvence(value);
-                    _workerInfo.StateProvince = value;
+                    if (ValidateStateProvence(value))
+                        _workerInfo.StateProvince = value;
                 }
             }
         }
@@ -340,10 +341,8 @@ namespace AHED.Model
             ReplicateId = workerInfo.ReplicateId;
             Task = workerInfo.Task;
             Age = workerInfo.Age.HasValue ? workerInfo.Age.ToString() : String.Empty;
-            HeightUnits = (workerInfo.Height != null) ? workerInfo.Height.OriginalUnits : Length.DuInOrCm;
-            Height = (workerInfo.Height != null) ? workerInfo.Height.OriginalValue.ToString() : String.Empty;
-            WeightUnits = (workerInfo.Weight != null) ? workerInfo.Weight.OriginalUnits : Mass.DisplayUnits;
-            Weight = (workerInfo.Weight != null) ? workerInfo.Weight.OriginalValue.ToString() : String.Empty;
+            LengthInOrCmTextAndUnits(workerInfo.Height, out _heightText, out _heightUnits);
+            MassTextAndUnits(workerInfo.Weight, out _weightText, out _weightUnits);
             Gender = workerInfo.Gender;
             YearsExperience = workerInfo.YearsExperience.HasValue ? workerInfo.YearsExperience.ToString() : String.Empty;
             Employment = workerInfo.Employment;
@@ -525,9 +524,9 @@ namespace AHED.Model
         /// <returns>Whether <c>value</c> is a valid <c>Weight</c>.</returns>
         private bool ValidateWeight(string str, out Mass value)
         {
-            return ValidateLength(str, _weightUnits,
-                                  WEIGHT, Properties.Resources.WorkerInfo_Invalid_Weight,
-                                  out value);
+            return ValidateMass(str, _weightUnits,
+                                WEIGHT, Properties.Resources.WorkerInfo_Invalid_Weight,
+                                out value);
         }
 
         /// <summary>

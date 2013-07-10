@@ -71,6 +71,21 @@ namespace AHED.Model
 
         }
 
+        protected void MassPerVolumeTextAndUnits(MassPerVolume mass, out string massText, out MassPerVolume.Units massUnits)
+        {
+            if (mass == null)
+            {
+                massText = String.Empty;
+                massUnits = MassPerVolume.DisplayUnits;
+            }
+            else
+            {
+                massText = mass.ToString();
+                massUnits = mass.OriginalUnits;
+            }
+
+        }
+
         protected void PressureTextAndUnits(Pressure pressure, out string pressureText, out Pressure.Units pressureUnits)
         {
             if (pressure == null)
@@ -260,6 +275,49 @@ namespace AHED.Model
             return true;
         }
 
+        /// <summary>
+        /// Check whether <c>value</c> is a valid <c>TotalLoadsMixed</c>.
+        /// </summary>
+        /// <remarks>
+        /// Currently accepts null or any positive value.
+        /// </remarks>
+        /// <param name="str">The raw string to validate as a quantity.</param>
+        /// <param name="positiveOnly">Whether only positive values are valid.</param>
+        /// <param name="propertyName">The property name to use to register/clear errors.</param>
+        /// <param name="errorText">The error text to use.</param>
+        /// <param name="value">Value to validiate.</param>
+        /// <returns>Whether <c>value</c> is a valid <c>TotalLoadsMixed</c>.</returns>
+        public bool ValidateInt(string str, bool positiveOnly,
+                                string propertyName, string errorText,
+                                out int? value)
+        {
+            if (String.IsNullOrEmpty(str))
+            {
+                value = null;
+                RemoveError(propertyName, errorText);
+                return true;
+            }
+
+            int numericValue;
+            if (!Int32.TryParse(str, out numericValue))
+            {
+                value = null;
+                AddError(propertyName, errorText, false);
+                return false;
+            }
+
+            if (positiveOnly && numericValue <= 0)
+            {
+                value = null;
+                AddError(propertyName, errorText, false);
+                return false;
+            }
+
+            RemoveError(propertyName, errorText);
+            value = numericValue;
+            return true;
+        }
+
         public bool ValidateRange(double? value, double? minValue, double? maxValue,
                                   string propertyName, string errorText)
         {
@@ -409,6 +467,47 @@ namespace AHED.Model
 
             RemoveError(propertyName, errorText);
             value = new Mass(numericValue, units);
+            return true;
+        }
+
+        /// <summary>
+        /// Check whether <c>value</c> is a valid <c>Mass</c>.
+        /// </summary>
+        /// <remarks>
+        /// Currently accepts null, and any positive value.
+        /// </remarks>
+        /// <param name="str">The raw string to validate as a Mass.</param>
+        /// <param name="units">The units to use for this mass/volume.</param>
+        /// <param name="propertyName">The property name to use to register/clear errors.</param>
+        /// <param name="errorText">The error text to use.</param>
+        /// <param name="value">Value to validiate.</param>
+        /// <returns>Whether <c>value</c> is a valid <c>Mass</c>.</returns>
+        public bool ValidateMassPerVolume(string str, MassPerVolume.Units units, string propertyName, string errorText, out MassPerVolume value)
+        {
+            if (String.IsNullOrEmpty(str))
+            {
+                value = null;
+                RemoveError(propertyName, errorText);
+                return true;
+            }
+
+            double numericValue;
+            if (!Double.TryParse(str, out numericValue))
+            {
+                value = null;
+                AddError(propertyName, errorText, false);
+                return false;
+            }
+
+            if (numericValue <= 0)
+            {
+                value = null;
+                AddError(propertyName, errorText, false);
+                return false;
+            }
+
+            RemoveError(propertyName, errorText);
+            value = new MassPerVolume(numericValue, units);
             return true;
         }
 

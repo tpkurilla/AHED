@@ -14,11 +14,25 @@ namespace AHED.ViewModel
 
         readonly ProductInfoModel _productInfo;
 
+        #region Valid Options for StaticItems
+
         StaticItem[] _pesticideOptions;
 
         StaticItem[] _formulationOptions;
 
         StaticItem[] _packageOptions;
+
+        #endregion Valid Options for StaticItems
+
+        #region Valid Units Options for properties
+
+        private Mass.Units[] _packageWeightUnitsOptions;
+
+        private Volume.Units[] _packageVolumeUnitsOptions;
+
+        private MassPerVolume.Units[] _aiMassPerVolumeUnitsOptions;
+
+        #endregion Valid Units Options for properties
 
         #endregion // Fields
 
@@ -30,6 +44,17 @@ namespace AHED.ViewModel
                 throw new ArgumentNullException("productInfo");
 
             _productInfo = productInfo;
+
+            ActionOfPesticide = productInfo.ActionOfPesticide;
+            Formulation = productInfo.Formulation;
+            Package = productInfo.Package;
+            PackageWeight = productInfo.PackageWeight;
+            PackageVolume = productInfo.PackageVolume;
+            VaporPressure = productInfo.VaporPressure;
+            PercentageAiByWeight = productInfo.PercentageAiByWeight;
+            AiMassPerVolume = productInfo.AiMassPerVolume;
+            VaporPressureAtC = productInfo.VaporPressureAtC;
+            VaporPressureCitation = productInfo.VaporPressureCitation;
         }
 
         #endregion // Constructor
@@ -88,6 +113,58 @@ namespace AHED.ViewModel
 
         #endregion StaticItem Choices
 
+        #region Units Choices
+
+        /// <summary>
+        /// Returns an array of valid choices for PackageWeightUnits selector.
+        /// </summary>
+        public Mass.Units[] PackageWeightUnitsOptions
+        {
+            get
+            {
+                if (_packageWeightUnitsOptions == null)
+                {
+                    _packageWeightUnitsOptions = new Mass.Units[] { Mass.Units.Pounds, Mass.Units.Kilograms };
+                }
+
+                return _packageWeightUnitsOptions;
+            }
+        }
+
+        /// <summary>
+        /// Returns an array of valid choices for PackageVolumeUnits selector.
+        /// </summary>
+        public Volume.Units[] PackageVolumeUnitsOptions
+        {
+            get
+            {
+                if (_packageVolumeUnitsOptions == null)
+                {
+                    _packageVolumeUnitsOptions = new Volume.Units[] { Volume.Units.Gallons, Volume.Units.Liters };
+                }
+
+                return _packageVolumeUnitsOptions;
+            }
+        }
+
+        /// <summary>
+        /// Returns an array of valid choices for AiMassPerVolumeUnits selector.
+        /// </summary>
+        public MassPerVolume.Units[] AiMassPerVolumeUnitsOptions
+        {
+            get
+            {
+                if (_aiMassPerVolumeUnitsOptions == null)
+                {
+                    _aiMassPerVolumeUnitsOptions = new MassPerVolume.Units[] { MassPerVolume.Units.PoundsPerGallon, MassPerVolume.Units.GramsPerLiter };
+                }
+
+                return _aiMassPerVolumeUnitsOptions;
+            }
+        }
+
+        #endregion Units Choices
+
         #endregion Presentation Properties
 
         #region ProductInfo Properties
@@ -131,18 +208,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Mass PackageWeight
+        public Mass.Units PackageWeightUnits
+        {
+            get { return _productInfo.PackageWeightUnits; }
+            set
+            {
+                if (value != _productInfo.PackageWeightUnits)
+                {
+                    _productInfo.PackageWeightUnits = value;
+                    base.OnPropertyChanged(ProductInfoModel.PACKAGE_WEIGHT_UNITS);
+                    base.OnPropertyChanged(ProductInfoModel.PACKAGE_WEIGHT);
+                }
+            }
+        }
+
+        public string PackageWeight
         {
             get { return _productInfo.PackageWeight; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _productInfo.PackageWeight)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _productInfo.PackageWeight.OriginalUnits
-                    && value.OriginalValue == _productInfo.PackageWeight.OriginalValue)
                     return;
 
                 _productInfo.PackageWeight = value;
@@ -150,18 +235,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Volume PackageVolume
+        public Volume.Units PackageVolumeUnits
+        {
+            get { return _productInfo.PackageVolumeUnits; }
+            set
+            {
+                if (value != _productInfo.PackageVolumeUnits)
+                {
+                    _productInfo.PackageVolumeUnits = value;
+                    base.OnPropertyChanged(ProductInfoModel.PACKAGE_VOLUME_UNITS);
+                    base.OnPropertyChanged(ProductInfoModel.PACKAGE_VOLUME);
+                }
+            }
+        }
+
+        public string PackageVolume
         {
             get { return _productInfo.PackageVolume; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _productInfo.PackageVolume)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _productInfo.PackageVolume.OriginalUnits
-                    && value.OriginalValue == _productInfo.PackageVolume.OriginalValue)
                     return;
 
                 _productInfo.PackageVolume = value;
@@ -169,7 +262,7 @@ namespace AHED.ViewModel
             }
         }
 
-        public double? VaporPressure
+        public string VaporPressure
         {
             get { return _productInfo.VaporPressure; }
             set
@@ -182,7 +275,7 @@ namespace AHED.ViewModel
             }
         }
 
-        public double? PercentageAiByWeight
+        public string PercentageAiByWeight
         {
             get { return _productInfo.PercentageAiByWeight; }
             set
@@ -195,18 +288,12 @@ namespace AHED.ViewModel
             }
         }
 
-        public MassPerVolume AiMassPerVolume
+        public string AiMassPerVolume
         {
             get { return _productInfo.AiMassPerVolume; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _productInfo.AiMassPerVolume)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _productInfo.AiMassPerVolume.OriginalUnits
-                    && value.OriginalValue == _productInfo.AiMassPerVolume.OriginalValue)
                     return;
 
                 _productInfo.AiMassPerVolume = value;
@@ -214,7 +301,7 @@ namespace AHED.ViewModel
             }
         }
 
-        public double? VaporPressureAtC
+        public string VaporPressureAtC
         {
             get { return _productInfo.VaporPressureAtC; }
             set

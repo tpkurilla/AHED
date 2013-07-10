@@ -154,7 +154,7 @@ namespace AHED.ViewModel
 
         #endregion Presentation Properties
 
-        #region MixingInfo Properties
+        #region ApplicationInfo Properties
 
         public StaticItem EquipmentUsed
         {
@@ -325,18 +325,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Length CropHeight
+        public Length.Units HeightUnits
+        {
+            get { return _applicationInfo.CropHeightUnits; }
+            set
+            {
+                if (value != _applicationInfo.CropHeightUnits)
+                {
+                    _applicationInfo.CropHeightUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.CROP_HEIGHT_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.CROP_HEIGHT);
+                }
+            }
+        }
+
+        public string CropHeight
         {
             get { return _applicationInfo.CropHeight; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.CropHeight)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.CropHeight.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.CropHeight.OriginalValue)
                     return;
 
                 _applicationInfo.CropHeight = value;
@@ -383,18 +391,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Length SpacingBetweenRows
+        public Length.Units SpacingBetweenRowsUnits
+        {
+            get { return _applicationInfo.SpacingBetweenRowsUnits; }
+            set
+            {
+                if (value != _applicationInfo.SpacingBetweenRowsUnits)
+                {
+                    _applicationInfo.SpacingBetweenRowsUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.SPACING_BETWEEN_ROWS_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.SPACING_BETWEEN_ROWS);
+                }
+            }
+        }
+
+        public string SpacingBetweenRows
         {
             get { return _applicationInfo.SpacingBetweenRows; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.SpacingBetweenRows)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.SpacingBetweenRows.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.SpacingBetweenRows.OriginalValue)
                     return;
 
                 _applicationInfo.SpacingBetweenRows = value;
@@ -402,7 +418,21 @@ namespace AHED.ViewModel
             }
         }
 
-        public Velocity GroundSpeed
+        public Velocity.Units GroundSpeedUnits
+        {
+            get { return _applicationInfo.GroundSpeedUnits; }
+            set
+            {
+                if (value != _applicationInfo.GroundSpeedUnits)
+                {
+                    _applicationInfo.GroundSpeedUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.GROUND_SPEED_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.GROUND_SPEED);
+                }
+            }
+        }
+
+        public string GroundSpeed
         {
             get { return _applicationInfo.GroundSpeed; }
             set
@@ -415,18 +445,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Length BoomHeight
+        public Length.Units BoomHeightUnits
+        {
+            get { return _applicationInfo.BoomHeightUnits; }
+            set
+            {
+                if (value != _applicationInfo.BoomHeightUnits)
+                {
+                    _applicationInfo.BoomHeightUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.BOOM_HEIGHT_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.BOOM_HEIGHT);
+                }
+            }
+        }
+
+        public string BoomHeight
         {
             get { return _applicationInfo.BoomHeight; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.BoomHeight)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.BoomHeight.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.BoomHeight.OriginalValue)
                     return;
 
                 _applicationInfo.BoomHeight = value;
@@ -434,18 +472,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Length BoomWidth
+        public Length.Units BoomWidthUnits
+        {
+            get { return _applicationInfo.BoomWidthUnits; }
+            set
+            {
+                if (value != _applicationInfo.BoomWidthUnits)
+                {
+                    _applicationInfo.BoomWidthUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.BOOM_WIDTH_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.BOOM_WIDTH);
+                }
+            }
+        }
+
+        public string BoomWidth
         {
             get { return _applicationInfo.BoomWidth; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.BoomWidth)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.BoomWidth.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.BoomWidth.OriginalValue)
                     return;
 
                 _applicationInfo.BoomWidth = value;
@@ -453,18 +499,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Length SwathWidth
+        public Length.Units SwathWidthUnits
+        {
+            get { return _applicationInfo.SwathWidthUnits; }
+            set
+            {
+                if (value != _applicationInfo.SwathWidthUnits)
+                {
+                    _applicationInfo.SwathWidthUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.SWATH_WIDTH_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.SWATH_WIDTH);
+                }
+            }
+        }
+
+        public string SwathWidth
         {
             get { return _applicationInfo.SwathWidth; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.SwathWidth)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.SwathWidth.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.SwathWidth.OriginalValue)
                     return;
 
                 _applicationInfo.SwathWidth = value;
@@ -472,18 +526,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Length BandWidth
+        public Length.Units BandWidthUnits
+        {
+            get { return _applicationInfo.BandWidthUnits; }
+            set
+            {
+                if (value != _applicationInfo.BandWidthUnits)
+                {
+                    _applicationInfo.BandWidthUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.BAND_WIDTH_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.BAND_WIDTH);
+                }
+            }
+        }
+
+        public string BandWidth
         {
             get { return _applicationInfo.BandWidth; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.BandWidth)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.BandWidth.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.BandWidth.OriginalValue)
                     return;
 
                 _applicationInfo.BandWidth = value;
@@ -491,18 +553,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Length Depth
+        public Length.Units DepthUnits
+        {
+            get { return _applicationInfo.DepthUnits; }
+            set
+            {
+                if (value != _applicationInfo.DepthUnits)
+                {
+                    _applicationInfo.DepthUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.DEPTH_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.DEPTH);
+                }
+            }
+        }
+
+        public string Depth
         {
             get { return _applicationInfo.Depth; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.Depth)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.Depth.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.Depth.OriginalValue)
                     return;
 
                 _applicationInfo.Depth = value;
@@ -510,7 +580,7 @@ namespace AHED.ViewModel
             }
         }
 
-        public double? DiskSize
+        public string DiskSize
         {
             get { return _applicationInfo.DiskSize; }
             set
@@ -523,7 +593,7 @@ namespace AHED.ViewModel
             }
         }
 
-        public int? NumberOfNozzles
+        public string NumberOfNozzles
         {
             get { return _applicationInfo.NumberOfNozzles; }
             set
@@ -562,18 +632,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Pressure NozzlePressure
+        public Pressure.Units NozzlePressureUnits
+        {
+            get { return _applicationInfo.NozzlePressureUnits; }
+            set
+            {
+                if (value != _applicationInfo.NozzlePressureUnits)
+                {
+                    _applicationInfo.NozzlePressureUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.NOZZLE_PRESSURE_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.NOZZLE_PRESSURE);
+                }
+            }
+        }
+
+        public string NozzlePressure
         {
             get { return _applicationInfo.NozzlePressure; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.NozzlePressure)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.NozzlePressure.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.NozzlePressure.OriginalValue)
                     return;
 
                 _applicationInfo.NozzlePressure = value;
@@ -581,18 +659,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Volume SprayerTankCapacity
+        public Volume.Units SprayerTankCapacityUnits
+        {
+            get { return _applicationInfo.SprayerTankCapacityUnits; }
+            set
+            {
+                if (value != _applicationInfo.SprayerTankCapacityUnits)
+                {
+                    _applicationInfo.SprayerTankCapacityUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.SPRAYER_TANK_CAPACITY_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.SPRAYER_TANK_CAPACITY);
+                }
+            }
+        }
+
+        public string SprayerTankCapacity
         {
             get { return _applicationInfo.SprayerTankCapacity; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.SprayerTankCapacity)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.SprayerTankCapacity.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.SprayerTankCapacity.OriginalValue)
                     return;
 
                 _applicationInfo.SprayerTankCapacity = value;
@@ -600,18 +686,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Volume HopperCapacity
+        public Volume.Units HopperCapacityUnits
+        {
+            get { return _applicationInfo.HopperCapacityUnits; }
+            set
+            {
+                if (value != _applicationInfo.HopperCapacityUnits)
+                {
+                    _applicationInfo.HopperCapacityUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.HOPPER_CAPACITY_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.HOPPER_CAPACITY);
+                }
+            }
+        }
+
+        public string HopperCapacity
         {
             get { return _applicationInfo.HopperCapacity; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.HopperCapacity)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.HopperCapacity.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.HopperCapacity.OriginalValue)
                     return;
 
                 _applicationInfo.HopperCapacity = value;
@@ -619,7 +713,7 @@ namespace AHED.ViewModel
             }
         }
 
-        public double? TotalLoadsApplied
+        public string TotalLoadsApplied
         {
             get { return _applicationInfo.TotalLoadsApplied; }
             set
@@ -632,18 +726,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Mass TotalAiApplied
+        public Mass.Units TotalAiAppliedUnits
+        {
+            get { return _applicationInfo.TotalAiAppliedUnits; }
+            set
+            {
+                if (value != _applicationInfo.TotalAiAppliedUnits)
+                {
+                    _applicationInfo.TotalAiAppliedUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.TOTAL_AI_APPLIED_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.TOTAL_AI_APPLIED);
+                }
+            }
+        }
+
+        public string TotalAiApplied
         {
             get { return _applicationInfo.TotalAiApplied; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.TotalAiApplied)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.TotalAiApplied.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.TotalAiApplied.OriginalValue)
                     return;
 
                 _applicationInfo.TotalAiApplied = value;
@@ -651,18 +753,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Volume TotalSprayApplied
+        public Volume.Units TotalSprayAppliedUnits
+        {
+            get { return _applicationInfo.TotalSprayAppliedUnits; }
+            set
+            {
+                if (value != _applicationInfo.TotalSprayAppliedUnits)
+                {
+                    _applicationInfo.TotalSprayAppliedUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.TOTAL_SPRAY_APPLIED_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.TOTAL_SPRAY_APPLIED);
+                }
+            }
+        }
+
+        public string TotalSprayApplied
         {
             get { return _applicationInfo.TotalSprayApplied; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.TotalSprayApplied)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.TotalSprayApplied.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.TotalSprayApplied.OriginalValue)
                     return;
 
                 _applicationInfo.TotalSprayApplied = value;
@@ -670,18 +780,26 @@ namespace AHED.ViewModel
             }
         }
 
-        public Area AreaTreated
+        public Area.Units AreaTreatedUnits
+        {
+            get { return _applicationInfo.AreaTreatedUnits; }
+            set
+            {
+                if (value != _applicationInfo.AreaTreatedUnits)
+                {
+                    _applicationInfo.AreaTreatedUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.AREA_TREATED_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.AREA_TREATED);
+                }
+            }
+        }
+
+        public string AreaTreated
         {
             get { return _applicationInfo.AreaTreated; }
             set
             {
-                // If this is the same object, then it has not changed
                 if (value == _applicationInfo.AreaTreated)
-                    return;
-
-                // If the units and the values are the same, then it has not changed
-                if (value.OriginalUnits == _applicationInfo.AreaTreated.OriginalUnits
-                    && value.OriginalValue == _applicationInfo.AreaTreated.OriginalValue)
                     return;
 
                 _applicationInfo.AreaTreated = value;
@@ -689,7 +807,7 @@ namespace AHED.ViewModel
             }
         }
 
-        public double? HumidityMax
+        public string HumidityMax
         {
             get { return _applicationInfo.HumidityMax; }
             set
@@ -702,7 +820,7 @@ namespace AHED.ViewModel
             }
         }
 
-        public double? HumidityMin
+        public string HumidityMin
         {
             get { return _applicationInfo.HumidityMin; }
             set
@@ -715,7 +833,7 @@ namespace AHED.ViewModel
             }
         }
 
-        public double? Humidity
+        public string Humidity
         {
             get { return _applicationInfo.Humidity; }
             set
@@ -728,7 +846,21 @@ namespace AHED.ViewModel
             }
         }
 
-        public Temperature TemperatureMax
+        public Temperature.Units TemperatureMaxUnits
+        {
+            get { return _applicationInfo.TemperatureMaxUnits; }
+            set
+            {
+                if (value != _applicationInfo.TemperatureMaxUnits)
+                {
+                    _applicationInfo.TemperatureMaxUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.TEMPERATURE_MAX_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.TEMPERATURE_MAX);
+                }
+            }
+        }
+
+        public string TemperatureMax
         {
             get { return _applicationInfo.TemperatureMax; }
             set
@@ -741,7 +873,21 @@ namespace AHED.ViewModel
             }
         }
 
-        public Temperature TemperatureMin
+        public Temperature.Units TemperatureMinUnits
+        {
+            get { return _applicationInfo.TemperatureMinUnits; }
+            set
+            {
+                if (value != _applicationInfo.TemperatureMinUnits)
+                {
+                    _applicationInfo.TemperatureMinUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.TEMPERATURE_MIN_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.TEMPERATURE_MIN);
+                }
+            }
+        }
+
+        public string TemperatureMin
         {
             get { return _applicationInfo.TemperatureMin; }
             set
@@ -754,7 +900,21 @@ namespace AHED.ViewModel
             }
         }
 
-        public Temperature Temperature
+        public Temperature.Units TemperatureUnits
+        {
+            get { return _applicationInfo.TemperatureUnits; }
+            set
+            {
+                if (value != _applicationInfo.TemperatureUnits)
+                {
+                    _applicationInfo.TemperatureUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.TEMPERATURE_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.TEMPERATURE);
+                }
+            }
+        }
+
+        public string Temperature
         {
             get { return _applicationInfo.Temperature; }
             set
@@ -767,7 +927,21 @@ namespace AHED.ViewModel
             }
         }
 
-        public Velocity WindSpeedMax
+        public Velocity.Units WindSpeedMaxUnits
+        {
+            get { return _applicationInfo.WindSpeedMaxUnits; }
+            set
+            {
+                if (value != _applicationInfo.WindSpeedMaxUnits)
+                {
+                    _applicationInfo.WindSpeedMaxUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.WIND_SPEED_MAX_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.WIND_SPEED_MAX);
+                }
+            }
+        }
+
+        public string WindSpeedMax
         {
             get { return _applicationInfo.WindSpeedMax; }
             set
@@ -780,7 +954,21 @@ namespace AHED.ViewModel
             }
         }
 
-        public Velocity WindSpeedMin
+        public Velocity.Units WindSpeedMinUnits
+        {
+            get { return _applicationInfo.WindSpeedMinUnits; }
+            set
+            {
+                if (value != _applicationInfo.WindSpeedMinUnits)
+                {
+                    _applicationInfo.WindSpeedMinUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.WIND_SPEED_MIN_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.WIND_SPEED_MIN);
+                }
+            }
+        }
+
+        public string WindSpeedMin
         {
             get { return _applicationInfo.WindSpeedMin; }
             set
@@ -793,7 +981,21 @@ namespace AHED.ViewModel
             }
         }
 
-        public Velocity WindSpeed
+        public Velocity.Units WindSpeedUnits
+        {
+            get { return _applicationInfo.WindSpeedUnits; }
+            set
+            {
+                if (value != _applicationInfo.WindSpeedUnits)
+                {
+                    _applicationInfo.WindSpeedUnits = value;
+                    base.OnPropertyChanged(ApplicationInfoModel.WIND_SPEED_UNITS);
+                    base.OnPropertyChanged(ApplicationInfoModel.WIND_SPEED);
+                }
+            }
+        }
+
+        public string WindSpeed
         {
             get { return _applicationInfo.WindSpeed; }
             set

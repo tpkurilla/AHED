@@ -8,6 +8,9 @@ namespace AHED.Model
 {
     /// <summary>
     /// Wraps <c>MixingInfo</c> for editable viewing such as in DataEntry.
+    /// <br/>
+    /// NOTE: Changes to Units enumerated values are assumed correct.  All other
+    /// error checking *should* be in place.
     /// </summary>
     public class MixingInfoModel : BaseModel
     {

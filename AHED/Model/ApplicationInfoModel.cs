@@ -202,7 +202,7 @@ namespace AHED.Model
         }
 
         private Length.Units _cropHeightUnits;
-        public Length.Units HeightUnits
+        public Length.Units CropHeightUnits
         {
             get { return _cropHeightUnits; }
             set
@@ -1311,6 +1311,7 @@ namespace AHED.Model
         public const string SWATH_WIDTH_UNITS = "SwathWidthUnits";
         public const string BAND_WIDTH_UNITS = "BandWidthUnits";
         public const string DEPTH_UNITS = "DepthUnits";
+        public const string NOZZLE_PRESSURE_UNITS = "NozzlePressureUnits";
         public const string SPRAYER_TANK_CAPACITY_UNITS = "SprayerTankCapacityUnits";
         public const string HOPPER_CAPACITY_UNITS = "HopperCapacityUnits";
         public const string TOTAL_AI_APPLIED_UNITS = "TotalAIAppliedUnits";
@@ -1735,20 +1736,14 @@ namespace AHED.Model
         /// <remarks>
         /// Currently accepts null, and any positive value.
         /// </remarks>
+        /// <param name="str">The raw string to validate as a size.</param>
         /// <param name="value">Value to validiate.</param>
         /// <returns>Whether <c>value</c> is a valid <c>DiskSize</c>.</returns>
-        private bool ValidateDiskSize(double? value)
+        private bool ValidateDiskSize(string str, out double? value)
         {
-            bool isValid = true;
-            if (!value.HasValue || value.Value > 0)
-                RemoveError(DISK_SIZE, Properties.Resources.ApplicationInfo_Invalid_DiskSize);
-            else
-            {
-                AddError(DISK_SIZE, Properties.Resources.ApplicationInfo_Invalid_DiskSize, false);
-                isValid = false;
-            }
-
-            return isValid;
+            return ValidateDouble(str, PositiveOnly,
+                                  DISK_SIZE, Properties.Resources.ApplicationInfo_Invalid_DiskSize,
+                                  out value);
         }
 
         /// <summary>
@@ -1757,20 +1752,14 @@ namespace AHED.Model
         /// <remarks>
         /// Currently accepts null, and any positive value.
         /// </remarks>
+        /// <param name="str">The raw string to validate as a number of nozzles.</param>
         /// <param name="value">Value to validiate.</param>
         /// <returns>Whether <c>value</c> is a valid <c>NumberOfNozzles</c>.</returns>
-        private bool ValidateNumberOfNozzles(int? value)
+        private bool ValidateNumberOfNozzles(string str, out int? value)
         {
-            bool isValid = true;
-            if (!value.HasValue || value.Value > 0)
-                RemoveError(NUMBER_OF_NOZZLES, Properties.Resources.ApplicationInfo_Invalid_NumberOfNozzles);
-            else
-            {
-                AddError(NUMBER_OF_NOZZLES, Properties.Resources.ApplicationInfo_Invalid_NumberOfNozzles, false);
-                isValid = false;
-            }
-
-            return isValid;
+            return ValidateInt(str, PositiveOnly,
+                               NUMBER_OF_NOZZLES, Properties.Resources.ApplicationInfo_Invalid_NumberOfNozzles,
+                               out value);
         }
 
         /// <summary>
