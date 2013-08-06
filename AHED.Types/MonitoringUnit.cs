@@ -1,52 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
+using System.Linq;
 
 namespace AHED.Types
 {
     [Serializable]
-    public class MonitoringUnit
+    public class MonitoringUnit : IDeepClone<MonitoringUnit>, IPropertyInitializer
     {
-        public WorkerInfo Worker { get; set; }
+        public WorkerInfo WorkerInfo { get; set; }
         public ProductInfo ProductInfo { get; set; }
         public MixingInfo MixingInfo { get; set; }
         public ApplicationInfo ApplicationInfo { get; set; }
-        public List<DosimeterMeasurement> Measurements { get; set; }
+        public List<DosimeterMeasurement> DosimeterMeasurements { get; set; }
         public List<string> Comments { get; set; }
 
         public MonitoringUnit()
         {
-            Worker = new WorkerInfo();
-            ProductInfo = new ProductInfo();
-            MixingInfo = new MixingInfo();
-            ApplicationInfo = new ApplicationInfo();
-            Measurements = new List<DosimeterMeasurement>();
-            Comments = new List<string>();
         }
 
         public MonitoringUnit(MonitoringUnit unit)
         {
-            Worker = new WorkerInfo(unit.Worker);
+            WorkerInfo = new WorkerInfo(unit.WorkerInfo);
             ProductInfo = new ProductInfo(unit.ProductInfo);
             MixingInfo = new MixingInfo(unit.MixingInfo);
             ApplicationInfo = new ApplicationInfo(unit.ApplicationInfo);
-            Measurements = DeepClone(unit.Measurements);
+            DosimeterMeasurements = (from meas in unit.DosimeterMeasurements
+                            select new DosimeterMeasurement(meas)
+                           ).ToList();
 
-            Comments = DeepClone(unit.Comments);
+            Comments = (from comment in unit.Comments
+                        select comment
+                       ).ToList();
         }
 
-        public static T DeepClone<T>(T obj)
+        public bool InitializeProperties()
         {
-            using (var ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(ms, obj);
-                ms.Position = 0;
+            WorkerInfo = WorkerInfo.Create();
+            ProductInfo = ProductInfo.Create();
+            MixingInfo = MixingInfo.Create();
+            ApplicationInfo = ApplicationInfo.Create();
+            DosimeterMeasurements = new List<DosimeterMeasurement>();
+            Comments = new List<string>();
 
-                return (T)formatter.Deserialize(ms);
-            }
+            return true;
         }
 
+        public static MonitoringUnit Create()
+        {
+            var result = new MonitoringUnit();
+            result.InitializeProperties();
+
+            return result;
+        }
+
+        public MonitoringUnit DeepClone()
+        {
+            return new MonitoringUnit(this);
+        }
     }
 }

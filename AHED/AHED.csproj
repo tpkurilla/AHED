@@ -53,22 +53,73 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\ApplicationInfoModel.cs" />
-    <Compile Include="Model\BaseModel.cs" />
-    <Compile Include="Model\LocalDatabase.cs" />
-    <Compile Include="Model\MixingInfoModel.cs" />
-    <Compile Include="Model\ProductInfoModel.cs" />
-    <Compile Include="Model\QaStatus.cs" />
-    <Compile Include="Model\StudyModel.cs" />
-    <Compile Include="Model\WorkerInfoModel.cs" />
-    <Compile Include="ViewModel\ApplicationInfoViewModel.cs" />
+    <Compile Include="Culture.cs" />
+    <Compile Include="DataAccess\LocalDatabase.cs" />
+    <Compile Include="Data\Model\AccessEntryModel.cs" />
+    <Compile Include="Data\Model\ApplicationInfoModel.cs" />
+    <Compile Include="Data\Model\ChangeLogEntryModel.cs" />
+    <Compile Include="Data\Model\CommentModel.cs" />
+    <Compile Include="Data\Model\DatabaseModel.cs" />
+    <Compile Include="Data\Model\DosimeterMeasurementModel.cs" />
+    <Compile Include="Data\Model\FieldFortEntryModel.cs" />
+    <Compile Include="Data\Model\FieldFortificationModel.cs" />
+    <Compile Include="Data\Model\MeasurementModel.cs" />
+    <Compile Include="Data\Model\MixingInfoModel.cs" />
+    <Compile Include="Data\Model\MonitoringUnitIdModel.cs" />
+    <Compile Include="Data\Model\MonitoringUnitModel.cs" />
+    <Compile Include="Data\Model\OuterMeasurementModel.cs" />
+    <Compile Include="Data\Model\PpeLayerModel.cs" />
+    <Compile Include="Data\Model\ProductInfoModel.cs" />
+    <Compile Include="Data\Model\StaticItemModel.cs" />
+    <Compile Include="Data\Model\StaticTableModel.cs" />
+    <Compile Include="Data\Model\StudyModel.cs" />
+    <Compile Include="Data\Model\WorkerInfoModel.cs" />
+    <Compile Include="Data\ViewModel\AccessEntryViewModel.cs" />
+    <Compile Include="Data\ViewModel\ApplicationInfoViewModel.cs" />
+    <Compile Include="Data\ViewModel\ChangeLogEntryViewModel.cs" />
+    <Compile Include="Data\ViewModel\CommentsViewModel.cs" />
+    <Compile Include="Data\ViewModel\CommentViewModel.cs" />
+    <Compile Include="Data\ViewModel\DatabaseViewModel.cs" />
+    <Compile Include="Data\ViewModel\DosimeterMeasurementViewModel.cs" />
+    <Compile Include="Data\ViewModel\FieldFortEntryViewModel.cs" />
+    <Compile Include="Data\ViewModel\FieldFortificationViewModel.cs" />
+    <Compile Include="Data\ViewModel\MeasurementViewModel.cs" />
+    <Compile Include="Data\ViewModel\MixingInfoViewModel.cs" />
+    <Compile Include="Data\ViewModel\MonitoringUnitIdViewModel.cs" />
+    <Compile Include="Data\ViewModel\MonitoringUnitMeasurementsViewModel.cs" />
+    <Compile Include="Data\ViewModel\MonitoringUnitViewModel.cs" />
+    <Compile Include="Data\ViewModel\OuterMeasurementViewModel.cs" />
+    <Compile Include="Data\ViewModel\PpeLayerViewModel.cs" />
+    <Compile Include="Data\ViewModel\ProductInfoViewModel.cs" />
+    <Compile Include="Data\ViewModel\StaticItemViewModel.cs" />
+    <Compile Include="Data\ViewModel\StaticTableViewModel.cs" />
+    <Compile Include="Data\ViewModel\StudyViewModel.cs" />
+    <Compile Include="Data\ViewModel\WorkerInfoViewModel.cs" />
+    <Compile Include="Model\DataSetModel.cs" />
+    <Compile Include="Model\Model.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\ModelCache.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ViewModel\WorkerInfoReportViewModel.cs" />
+    <Compile Include="ViewModel\AhedViewModel.cs" />
+    <Compile Include="ViewModel\AllViewModel.cs" />
+    <Compile Include="ViewModel\AnalyticToolsViewModel.cs" />
+    <Compile Include="ViewModel\DataReportsViewModel.cs" />
+    <Compile Include="ViewModel\LocalDatabasesViewModel.cs" />
+    <Compile Include="ViewModel\ServerDatabasesViewModel.cs" />
+    <Compile Include="ViewModel\SimpleViewModel.cs" />
     <Compile Include="ViewModel\CommandViewModel.cs" />
-    <Compile Include="ViewModel\DataEntryViewModel.cs" />
-    <Compile Include="ViewModel\MixingInfoViewModel.cs" />
-    <Compile Include="ViewModel\ProductInfoViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\SelectableViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="ViewModel\WorkerInfoViewModel.cs" />
+    <Compile Include="ViewModel\WorkspaceCollection.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -86,11 +137,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -119,6 +165,10 @@
       <Project>{90d2db54-b2f2-459a-908e-75d2e62a4cfb}</Project>
       <Name>AHED.Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

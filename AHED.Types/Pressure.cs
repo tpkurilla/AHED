@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace AHED.Types
 {
     [Serializable]
-    public class Pressure
+    public class Pressure : Quantity
     {
         public enum Units { Psi, Bar };
 
@@ -12,9 +12,8 @@ namespace AHED.Types
         public double DU { get { return ToDisplayUnits(); } }
         public double Psi { get { return ToPsi(); } }
         public double Bar { get { return ToBar(); } }
-        public bool HasValue { get { return OriginalValue.HasValue; } }
+        public bool HasValue { get { return Value.HasValue; } }
 
-        public double? OriginalValue { get; set; }
         public Units OriginalUnits { get; set; }
 
         public Pressure()
@@ -23,23 +22,29 @@ namespace AHED.Types
 
         public Pressure(Pressure rhs)
         {
-            OriginalValue = rhs.OriginalValue;
+            if (rhs == null)
+            {
+                Value = null;
+                OriginalUnits = DisplayUnits;
+                return;
+            }
+
+            Value = rhs.Value;
             OriginalUnits = rhs.OriginalUnits;
         }
 
         public Pressure(double value, Units units)
         {
-            OriginalValue = value;
+            Value = value;
             OriginalUnits = units;
         }
 
         public double ToDisplayUnits()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -48,11 +53,10 @@ namespace AHED.Types
 
         public double ToPsi()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -61,14 +65,34 @@ namespace AHED.Types
 
         public double ToBar()
         {
-            if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
                 return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
             return value * Conversions[OriginalUnits][Units.Bar];
+        }
+
+        public override string UnitsString()
+        {
+            return OriginalUnits.ToString();
+        }
+
+        public static void TextAndUnits(Pressure pressure, out string pressureText, out Units pressureUnits)
+        {
+            if (pressure == null)
+            {
+                pressureText = String.Empty;
+                pressureUnits = DisplayUnits;
+            }
+            else
+            {
+                pressureText = pressure.Text;
+                pressureUnits = pressure.OriginalUnits;
+            }
+
         }
 
         public static double Convert(double value, Units fromUnits, Units toUnits)
@@ -81,15 +105,15 @@ namespace AHED.Types
             if (!value.HasValue)
                 return Double.NaN;
 
-            return (double)value.OriginalValue * Conversions[value.OriginalUnits][toUnits];
+            return (double)value.Value * Conversions[value.OriginalUnits][toUnits];
         }
 
         // Takes the psi and bar values from a data entry or spreadsheet import,
         // and chooses which is the original value
         public static Pressure PsiOrBar(double? psi, double? bar)
         {
-            bool psiNull = (psi == null) || (!psi.HasValue);
-            bool barNull = (bar == null) || (!bar.HasValue);
+            bool psiNull = (psi == null);
+            bool barNull = (bar == null);
 
             // both are null, then so is the value
             if (psiNull && barNull)

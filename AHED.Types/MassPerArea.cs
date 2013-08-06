@@ -4,16 +4,15 @@ using System.Collections.Generic;
 namespace AHED.Types
 {
     [Serializable]
-    public class MassPerArea
+    public class MassPerArea : Quantity
     {
         public enum Units { MicrogramsPerSquareCm };
 
         public static Units DisplayUnits { get; set; }
         public double DU { get { return ToDisplayUnits(); } }
         public double C2 { get { return ToMicrogramsPerSquareCm(); } }
-        public bool HasValue { get { return OriginalValue.HasValue; } }
+        public bool HasValue { get { return Value.HasValue; } }
 
-        public double? OriginalValue { get; set; }
         public Units OriginalUnits { get; set; }
 
         public MassPerArea()
@@ -22,23 +21,29 @@ namespace AHED.Types
 
         public MassPerArea(MassPerArea rhs)
         {
-            OriginalValue = rhs.OriginalValue;
+            if (rhs == null)
+            {
+                Value = null;
+                OriginalUnits = DisplayUnits;
+                return;
+            }
+
+            Value = rhs.Value;
             OriginalUnits = rhs.OriginalUnits;
         }
 
         public MassPerArea(double value, Units units)
         {
-            OriginalValue = value;
+            Value = value;
             OriginalUnits = units;
         }
 
         public double ToDisplayUnits()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -47,15 +52,34 @@ namespace AHED.Types
 
         public double ToMicrogramsPerSquareCm()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
             return value * Conversions[OriginalUnits][Units.MicrogramsPerSquareCm];
+        }
+
+        public override string UnitsString()
+        {
+            return OriginalUnits.ToString();
+        }
+
+        public static void TextAndUnits(MassPerArea mass, out string massText, out Units massUnits)
+        {
+            if (mass == null)
+            {
+                massText = String.Empty;
+                massUnits = DisplayUnits;
+            }
+            else
+            {
+                massText = mass.Text;
+                massUnits = mass.OriginalUnits;
+            }
+
         }
 
         public static double Convert(double value, Units fromUnits, Units toUnits)
@@ -68,7 +92,7 @@ namespace AHED.Types
             if (!value.HasValue)
                 return Double.NaN;
 
-            return (double)value.OriginalValue * Conversions[value.OriginalUnits][toUnits];
+            return (double)value.Value * Conversions[value.OriginalUnits][toUnits];
         }
 
         #region Static conversion data
@@ -85,7 +109,7 @@ namespace AHED.Types
             DisplayUnits = Units.MicrogramsPerSquareCm;
 
             // From uG / cm2 to...
-            Dictionary<Units, double> tbl = new Dictionary<Units, double>();
+            var tbl = new Dictionary<Units, double>();
             tbl[Units.MicrogramsPerSquareCm] = 1.0;
             Conversions[Units.MicrogramsPerSquareCm] = tbl;
 

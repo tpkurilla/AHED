@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace AHED.Types
 {
-    public class StaticTable : IEnumerable<KeyValuePair<int,StaticItem>>
+    public class StaticTable : IEnumerable<KeyValuePair<int,StaticItem>>, IDeepClone<StaticTable>, IPropertyInitializer
     {
         /// <summary>
         /// The actual key -> <c>StaticItem</c> map used to hold all values for this table.
@@ -37,9 +36,22 @@ namespace AHED.Types
             StaticItems = new Dictionary<int, StaticItem>(newDict);
         }
 
+        public StaticTable(StaticTable table)
+        {
+            StaticItems = new Dictionary<int, StaticItem>(table.StaticItems);
+        }
+
         public void Add(StaticItem item)
         {
             StaticItems.Add(item.Key, item);
+        }
+
+        public bool InitializeProperties()
+        {
+            if (StaticItems == null)
+                StaticItems = new Dictionary<int, StaticItem>();
+
+            return true;
         }
 
         public Dictionary<int, StaticItem> GetGroup(StaticValues.Groups groupId)
@@ -57,7 +69,7 @@ namespace AHED.Types
             //var results = staticItems.Where(kvp => kvp.Value.staticGroup.CompareTo(groupName) == 0)
             //                         .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.item);
             var results = StaticItems.Where(kvp => kvp.Value.GroupId == groupId)
-                                     .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Desc);
+                                     .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Description);
 
             return results;
         }
@@ -91,20 +103,23 @@ namespace AHED.Types
 
         public IEnumerator<KeyValuePair<int, StaticItem>> GetEnumerator()
         {
-            foreach (KeyValuePair<int, StaticItem> item in StaticItems)
-            {
-                yield return item;
-            }
+            return ((IEnumerable<KeyValuePair<int, StaticItem>>) StaticItems).GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            foreach (KeyValuePair<int, StaticItem> item in StaticItems)
-            {
-                yield return item;
-            }
+            return StaticItems.GetEnumerator();
         }
 
         #endregion IEnumerator
+
+        #region IDeepClone Interface
+
+        public StaticTable DeepClone()
+        {
+            return new StaticTable(this);
+        }
+
+        #endregion IDeepClone Interface
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace AHED.Types
 {
     [Serializable]
-    public class Velocity
+    public class Velocity : Quantity
     {
         public enum Units { MilesPerHour, KilometersPerHour, MetersPerSecond };
 
@@ -17,9 +17,8 @@ namespace AHED.Types
         public double Kph { get { return ToKilometersPerHour(); } }
         public double Mps { get { return ToMetersPerSecond(); } }
 
-        public bool HasValue { get { return OriginalValue.HasValue; } }
+        public bool HasValue { get { return Value.HasValue; } }
 
-        public double? OriginalValue { get; set; }
         public Units OriginalUnits { get; set; }
 
         public Velocity()
@@ -28,23 +27,29 @@ namespace AHED.Types
 
         public Velocity(Velocity rhs)
         {
-            OriginalValue = rhs.OriginalValue;
+            if (rhs == null)
+            {
+                Value = null;
+                OriginalUnits = Units.MilesPerHour;
+                return;
+            }
+
+            Value = rhs.Value;
             OriginalUnits = rhs.OriginalUnits;
         }
 
         public Velocity(double value, Units units)
         {
-            OriginalValue = value;
+            Value = value;
             OriginalUnits = units;
         }
 
         public double ToDuMphOrKph()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -53,11 +58,10 @@ namespace AHED.Types
 
         public double ToDuMphOrMps()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -66,11 +70,10 @@ namespace AHED.Types
 
         public double ToMilesPerHour()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -79,10 +82,10 @@ namespace AHED.Types
 
         public double ToKilometersPerHour()
         {
-            if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
                 return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -91,14 +94,49 @@ namespace AHED.Types
 
         public double ToMetersPerSecond()
         {
-            if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
                 return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
             return value * Conversions[OriginalUnits][Units.MetersPerSecond];
+        }
+
+        public override string UnitsString()
+        {
+            return OriginalUnits.ToString();
+        }
+
+        public static void MphOrKphTextAndUnits(Velocity velocity, out string velocityText, out Units velocityUnits)
+        {
+            if (velocity == null)
+            {
+                velocityText = String.Empty;
+                velocityUnits = DuMphOrKph;
+            }
+            else
+            {
+                velocityText = velocity.Text;
+                velocityUnits = velocity.OriginalUnits;
+            }
+
+        }
+
+        public static void MphOrMpsTextAndUnits(Velocity velocity, out string velocityText, out Units velocityUnits)
+        {
+            if (velocity == null)
+            {
+                velocityText = String.Empty;
+                velocityUnits = DuMphOrMps;
+            }
+            else
+            {
+                velocityText = velocity.Text;
+                velocityUnits = velocity.OriginalUnits;
+            }
+
         }
 
         public static double Convert(double value, Units fromUnits, Units toUnits)
@@ -111,15 +149,15 @@ namespace AHED.Types
             if (!value.HasValue)
                 return Double.NaN;
 
-            return (double)value.OriginalValue * Conversions[value.OriginalUnits][toUnits];
+            return (double)value.Value * Conversions[value.OriginalUnits][toUnits];
         }
 
         // Takes the mph or kph values from a data entry or spreadsheet import,
         // and chooses which is the original value
         public static Velocity UseMphOrKph(double? mph, double? kph)
         {
-            bool mphNull = (mph == null) || (!mph.HasValue);
-            bool kphNull = (kph == null) || (!kph.HasValue);
+            bool mphNull = (mph == null);
+            bool kphNull = (kph == null);
 
             // both are null, then so is the value
             if (mphNull && kphNull)
@@ -144,8 +182,8 @@ namespace AHED.Types
         // and chooses which is the original value
         public static Velocity UseMphOrMps(double? mph, double? mps)
         {
-            bool mphNull = (mph == null) || (!mph.HasValue);
-            bool mpsNull = (mps == null) || (!mps.HasValue);
+            bool mphNull = (mph == null);
+            bool mpsNull = (mps == null);
 
             // both are null, then so is the value
             if (mphNull && mpsNull)
@@ -181,7 +219,7 @@ namespace AHED.Types
             DuMphOrMps = Units.MilesPerHour;
 
             // From mph to...
-            Dictionary<Units, double> tbl = new Dictionary<Units, double>();
+            var tbl = new Dictionary<Units, double>();
             tbl[Units.MilesPerHour] = 1.0;
             tbl[Units.KilometersPerHour] = 1.609344;
             tbl[Units.MetersPerSecond] = 0.44704;

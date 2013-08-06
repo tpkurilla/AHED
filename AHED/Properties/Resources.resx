@@ -519,6 +519,410 @@
   </data>
   <data name="WorkerInfo_Missing_Replicate_Id" xml:space="preserve">
     <value>Replicate ID must be provided</value>
-    <comment>Replicate Id is a require field used as part of the key of a Monitoring Unit.</comment>
+    <comment>Replicate Id is a required field used as part of the key of a Monitoring Unit.</comment>
+  </data>
+  <data name="ApplicationInfo_Exception_Cannot_Update" xml:space="preserve">
+    <value>Cannot update this ApplicationInfo because validation errors exist.</value>
+    <comment>Only valid ApplicationInfo can be saved.</comment>
+  </data>
+  <data name="FieldFortEntryVm_Exception_CannotSave" xml:space="preserve">
+    <value>Field fortification entry must be valid before it can be saved.</value>
+    <comment>Should not happen if the interface is built correctly.</comment>
+  </data>
+  <data name="FieldFortEntry_Description" xml:space="preserve">
+    <value>Description must be present, and unique in this Field Fortification.</value>
+    <comment>Description is a required field.</comment>
+  </data>
+  <data name="FieldFortEntry_Description_Unique" xml:space="preserve">
+    <value>Field fortification entries must have unique descriptions.</value>
+    <comment>Field fortification entries must have unique descriptions.</comment>
+  </data>
+  <data name="FieldFortEntry_Exception_Cannot_Update" xml:space="preserve">
+    <value>Cannot update this FieldFortEntry because validation errors exist.</value>
+    <comment>Only valid FieldFortEntry values can be saved.</comment>
+  </data>
+  <data name="FieldFortEntry_Fortification_Adjustment" xml:space="preserve">
+    <value>Input fortification adjustment factor must be present, and greater than 0.</value>
+    <comment>Input fortification adjustment factor is a required field.</comment>
+  </data>
+  <data name="FieldFortEntry_Fortification_Level" xml:space="preserve">
+    <value>Input fortification level must be present, and greater than 0.</value>
+    <comment>Input fortification level is a required field.</comment>
+  </data>
+  <data name="FieldFortification_Dosimeter_Description" xml:space="preserve">
+    <value>Dosimeter description must be one of the Field Fortification dosimeter descriptions.</value>
+    <comment>Valid values are in StaticValues.DosimeterGroupDescriptions[FieldFortitification].</comment>
+  </data>
+  <data name="FieldFortification_Event_Id" xml:space="preserve">
+    <value>Event Id must be provided and unique.</value>
+    <comment>Event Id is a required field.</comment>
+  </data>
+  <data name="MixingInfo_Exception_Cannot_Update" xml:space="preserve">
+    <value>Cannot update this MixingInfo because validation errors exist.</value>
+    <comment>Only valid MixingInfo can be saved.</comment>
+  </data>
+  <data name="MonitoringUnitId_Exception_Cannot_Upate" xml:space="preserve">
+    <value>Cannot update this MonitoringUnitId because validation errors exist.</value>
+    <comment>Only valid MonitoringUnitId values can be saved.</comment>
+  </data>
+  <data name="MonitoringUnitId_Replicate_Id" xml:space="preserve">
+    <value>Replicate Id must be provided.</value>
+    <comment>Replicate Id is a required field.</comment>
+  </data>
+  <data name="MonitoringUnitId_Worker_Id" xml:space="preserve">
+    <value>Worker Id must be provided.</value>
+    <comment>Worker Id is a required field.</comment>
+  </data>
+  <data name="MonitoringUnit_Id_Separator" xml:space="preserve">
+    <value>|</value>
+    <comment>This separates the StudyId-WorkerId-ReplicateId parts of the Monitoring Unit Id.</comment>
+  </data>
+  <data name="Study_Reviewer_Id" xml:space="preserve">
+    <value>Reviewer Id must be provided.</value>
+    <comment>Reviewer Id is a required field.</comment>
+  </data>
+  <data name="Study_Study_Number" xml:space="preserve">
+    <value>Study number must be present, and unique.</value>
+    <comment>Study number is a required field.</comment>
+  </data>
+  <data name="WorkerInfo_Exception_Cannot_Update" xml:space="preserve">
+    <value>Cannot update this WorkerInfo because validation errors exist.</value>
+    <comment>Only valid WorkerInfo can be saved.</comment>
+  </data>
+  <data name="WorkerInfo_Invalid_Id" xml:space="preserve">
+    <value>The WorkerId | ReplicateId pair must be unique within this Study.</value>
+    <comment>Both WorkerId and ReplicateId are used to uniquely identify a Monitoring Unit.</comment>
+  </data>
+  <data name="AllFieldFortEntries_Display_Name" xml:space="preserve">
+    <value>All Entries</value>
+    <comment>Display name for the AllEntriesViewModel object.</comment>
+  </data>
+  <data name="AllFieldForitifications_Display_Name" xml:space="preserve">
+    <value>Field Fortifications</value>
+    <comment>Title used for Field Fortification ViewModel.</comment>
+  </data>
+  <data name="AllMonitoringUnitIds_Display_Name" xml:space="preserve">
+    <value>Applicable Monitoring Unit Ids</value>
+    <comment>Display name for the AllMonitoringUnitIdsViewModel object.</comment>
+  </data>
+  <data name="DosimeterMeasurement_Invalid_Dosimeter_Description" xml:space="preserve">
+    <value>A valid Dosimeter Description must be chosen.</value>
+    <comment>Must be a member of StaticValues.DosimeterGroupDescriptions[Group].</comment>
+  </data>
+  <data name="DosimeterMeasurement_Invalid_Group" xml:space="preserve">
+    <value>A valid Dosimeter Group must be chosen.</value>
+    <comment>Must be a member of StaticValues.DosimeterGroups.</comment>
+  </data>
+  <data name="FieldFortificationViewModel_Command_CreateNewEntry" xml:space="preserve">
+    <value>New Entry</value>
+    <comment>Display name for the command that allows the user to create a new Entry for this Field Fortification.</comment>
+  </data>
+  <data name="FieldFortificationViewModel_Command_CreateNewMonitoringUnitId" xml:space="preserve">
+    <value>New Monitoring Unit Id</value>
+    <comment>Display name for the command that allows the user to create a new Monitoring Unit Id that this Field Fortification applies to.</comment>
+  </data>
+  <data name="FieldFortificationViewModel_Command_ViewAllEntries" xml:space="preserve">
+    <value>View all Entries</value>
+    <comment>Display name for the command that shows all Entries.</comment>
+  </data>
+  <data name="FieldFortificationViewModel_Command_ViewAllMonitoringUnitIds" xml:space="preserve">
+    <value>View all Monitoring Unit Ids</value>
+    <comment>Display name for the command that shows all Monitoring Unit Ids.</comment>
+  </data>
+  <data name="FieldFortification_Exception_Cannot_Udpate" xml:space="preserve">
+    <value>Cannot update this Field Fortification because validation errors exist.</value>
+    <comment>Save should not be possible to trigger unless IsValid is true.</comment>
+  </data>
+  <data name="Measurement_Invalid_Input_Dosimeter_Matrix" xml:space="preserve">
+    <value>A valid Input Dosimeter Matrix must be chosen.</value>
+    <comment>Must be a member of StaticValues.DosimeterGroupMatrices[Group].</comment>
+  </data>
+  <data name="Measurement_Invalid_Input_Lod" xml:space="preserve">
+    <value>Input LOD must be &gt; 0</value>
+    <comment>A value must be provided.</comment>
+  </data>
+  <data name="Measurement_Invalid_Input_Loq" xml:space="preserve">
+    <value>LOQ must be &gt; 0</value>
+    <comment>A value must be provided.</comment>
+  </data>
+  <data name="Measurement_Invalid_Input_Residue" xml:space="preserve">
+    <value>Input Residue must be &gt; 0, LOQ, or LOQ</value>
+    <comment>A value must be provided.</comment>
+  </data>
+  <data name="StaticItem_Invalid_BodyPart" xml:space="preserve">
+    <value>A BodyPart must be chosen from the list.</value>
+    <comment>Only valid options are accepted.</comment>
+  </data>
+  <data name="StaticItem_Invalid_Choice" xml:space="preserve">
+    <value>A Choice must be made from the list of valid options.</value>
+    <comment>Only valid options are accepted.</comment>
+  </data>
+  <data name="StaticItem_Invalid_Clothing" xml:space="preserve">
+    <value>A piece of Clothing suitable for the chose BodyPart must be chosen.</value>
+    <comment>Only valid options are accepted.</comment>
+  </data>
+  <data name="AhedViewModel_DisplayName" xml:space="preserve">
+    <value>AHED v2.0.2</value>
+    <comment>Display value for the main AHED window.</comment>
+  </data>
+  <data name="AllOuterMeasurements_Display_Name" xml:space="preserve">
+    <value>Outer Measurements</value>
+    <comment>Display name for the Outer Measurements View Model.</comment>
+  </data>
+  <data name="AllPpeLayers_Display_Name" xml:space="preserve">
+    <value>PPE Layers</value>
+    <comment>Display name for the view model for all PPE Layers.</comment>
+  </data>
+  <data name="AllViewModel_Display_Name" xml:space="preserve">
+    <value>All Entries</value>
+    <comment>Display name for the AllViewModel workspace.</comment>
+  </data>
+  <data name="AuthorizationGroup_AhedAdministrator" xml:space="preserve">
+    <value>AHED Administrator</value>
+    <comment>AHED Administrator group.  Full Privelages.</comment>
+  </data>
+  <data name="AuthorizationGroup_AhedDataEntry" xml:space="preserve">
+    <value>AHED Data Entry</value>
+    <comment>AHED Data Entry group.  Can commit Studies to common data.</comment>
+  </data>
+  <data name="AuthorizationGroup_AhedQualityAssurance" xml:space="preserve">
+    <value>AHED Quality Assurance</value>
+    <comment>AHED Quality Assurance group.  Can enter QA annotations on Studies ready for review.</comment>
+  </data>
+  <data name="AuthorizationGroup_AhedUser" xml:space="preserve">
+    <value>AHED User</value>
+    <comment>AHED User group. Read access to all common data.  Write access to private data.</comment>
+  </data>
+  <data name="ChangeLogModel_Invalid_DateChanged" xml:space="preserve">
+    <value>A valid date must be provided, and it must be after the latest Changes Date in the containing Database.</value>
+    <comment>Required value.</comment>
+  </data>
+  <data name="ChangeLogModel_Invalid_Identity" xml:space="preserve">
+    <value>Must be the Local User, or match an Identity on the AHED Server.</value>
+    <comment>Required value.</comment>
+  </data>
+  <data name="ChangeLogModel_Invalid_VersionMajor" xml:space="preserve">
+    <value>Must have a value greater than or equal to the VersionMajor of the containing Database.</value>
+    <comment>Required value.</comment>
+  </data>
+  <data name="ChangeLogModel_Invalid_VersionMinor" xml:space="preserve">
+    <value>Must have a value greater than the VersionMinor of the containing Database.</value>
+    <comment>Required value.</comment>
+  </data>
+  <data name="Claim_Group" xml:space="preserve">
+    <value>http://schemas.xmlsoap.org/claims/Group</value>
+    <comment>Group Claim namespace.</comment>
+  </data>
+  <data name="CommentViewModel_Display_Name" xml:space="preserve">
+    <value>Comment</value>
+    <comment>Display text for Comment View Model.</comment>
+  </data>
+  <data name="CommentViewModel_Exception_Cannot_Save" xml:space="preserve">
+    <value>Cannot save this comment because validation errors exist.</value>
+    <comment>Only valid comments can be saved.</comment>
+  </data>
+  <data name="Comment_Invalid_Comment" xml:space="preserve">
+    <value>Comment cannot be null, but can be empty.</value>
+    <comment>Comment cannot be null, but can be empty.</comment>
+  </data>
+  <data name="CultureName" xml:space="preserve">
+    <value>en-US</value>
+    <comment>Culture name to use for ToString conversions.</comment>
+  </data>
+  <data name="DatabaseModel_Invalid_DateCreated" xml:space="preserve">
+    <value>A valid date must be provided.</value>
+    <comment>Required value.</comment>
+  </data>
+  <data name="DatabaseModel_Invalid_DateLastModified" xml:space="preserve">
+    <value>A valid date must be provided, and it cannot be before Date Created.</value>
+    <comment>Required value.</comment>
+  </data>
+  <data name="DatabaseModel_Invalid_Name" xml:space="preserve">
+    <value>Name is a required field.</value>
+    <comment>Required value.</comment>
+  </data>
+  <data name="DatabaseModel_Invalid_VersionMajor" xml:space="preserve">
+    <value>Must have a value greater than or equal to 1.</value>
+    <comment>Required value.</comment>
+  </data>
+  <data name="DatabaseModel_Invalid_VersionMinor" xml:space="preserve">
+    <value>Must have a value greater than or equal to 0.</value>
+    <comment>Required value.</comment>
+  </data>
+  <data name="DatabaseViewModel_Command_CreateNewAccessEntry" xml:space="preserve">
+    <value>New Access Entry</value>
+    <comment>Display text for command creating a new Access Entry.</comment>
+  </data>
+  <data name="DatabaseViewModel_Command_CreateNewStudy" xml:space="preserve">
+    <value>New Study</value>
+    <comment>Display text for command creating a new Study.</comment>
+  </data>
+  <data name="DatabaseViewModel_Command_Delete_Selected_AccessEntries" xml:space="preserve">
+    <value>Delete Selected Access Entries</value>
+    <comment>Display text for command deleting selected Access Entries.</comment>
+  </data>
+  <data name="DatabaseViewModel_Command_Delete_Selected_Studies" xml:space="preserve">
+    <value>Delete Selected Studies</value>
+    <comment>Display text for command deleting all selected Studies.</comment>
+  </data>
+  <data name="DatabaseViewModel_Command_ShowAllAccessEntries" xml:space="preserve">
+    <value>Access Entries</value>
+    <comment>Display text for command displaying all Access Entries.</comment>
+  </data>
+  <data name="DatabaseViewModel_Command_ShowAllChangeLogEntries" xml:space="preserve">
+    <value>Change Log</value>
+    <comment>Display text for command displaying all Change Log Entries.</comment>
+  </data>
+  <data name="DatabaseViewModel_Command_ShowAllStudies" xml:space="preserve">
+    <value>Studies</value>
+    <comment>Display text for command displaying all Studies.</comment>
+  </data>
+  <data name="DatabaseViewModel_Command_Show_StaticTable" xml:space="preserve">
+    <value>Static Table</value>
+    <comment>Display text for command displaying the Static Table.</comment>
+  </data>
+  <data name="DataViewModel_Command_ApplicationInfo" xml:space="preserve">
+    <value>Application Info</value>
+    <comment>Display text for the command displaying Application Info for the current DataSet.</comment>
+  </data>
+  <data name="DataViewModel_Command_FieldFortifications" xml:space="preserve">
+    <value>Field Fortifications</value>
+    <comment>Display text for the command displaying Field Fortifications for the current DataSet.</comment>
+  </data>
+  <data name="DataViewModel_Command_Measurements" xml:space="preserve">
+    <value>Measurements</value>
+    <comment>Display text for the command displaying Dosimeter Measurements for the current DataSet.</comment>
+  </data>
+  <data name="DataViewModel_Command_MixingInfo" xml:space="preserve">
+    <value>Mixing Info</value>
+    <comment>Display text for the command displaying Mixing Info for the current DataSet.</comment>
+  </data>
+  <data name="DataViewModel_Command_ProductInfo" xml:space="preserve">
+    <value>Product Info</value>
+    <comment>Display text for the command displaying Product Info for the current DataSet.</comment>
+  </data>
+  <data name="DataViewModel_Command_WorkerInfo" xml:space="preserve">
+    <value>Worker Info</value>
+    <comment>Display text for command displaying Worker Info for the current DataSet.</comment>
+  </data>
+  <data name="DosimeterMeasurementViewModel_Command_CreateNewOuterMeasurement" xml:space="preserve">
+    <value>New Outer Measurement</value>
+    <comment>Display text for command creating a new outer measurement.</comment>
+  </data>
+  <data name="DosimeterMeasurementViewModel_Command_CreateNewPpeLayer" xml:space="preserve">
+    <value>New PPE Layer</value>
+    <comment>Display text for command creating a new PPE Layer.</comment>
+  </data>
+  <data name="DosimeterMeasurementViewModel_Command_Delete_Selected_OuterMeasurements" xml:space="preserve">
+    <value>Delete Selected Outer Measurements</value>
+    <comment>Display text for command deleting selected Outer Measurements.</comment>
+  </data>
+  <data name="DosimeterMeasurementViewModel_Command_Delete_Selected_PpeLayers" xml:space="preserve">
+    <value>Delete Selected PPE Layers</value>
+    <comment>Display text for command deleting selected PPE Layers.</comment>
+  </data>
+  <data name="DosimeterMeasurementViewModel_Exception_Cannot_Save" xml:space="preserve">
+    <value>Cannot save this dosimeter measurement because validation errors exist.</value>
+    <comment>Only valid dosimeter measurements can be saved.</comment>
+  </data>
+  <data name="FieldFortificationViewModel_Command_Delete_Selected_Entries" xml:space="preserve">
+    <value>Delete Entries</value>
+    <comment>Display name for the command that deletes all selected FieldFortEntries.</comment>
+  </data>
+  <data name="FieldFortificationViewModel_Command_Delete_Selected_MonitoringUnitIds" xml:space="preserve">
+    <value>Delete Ids</value>
+    <comment>Display name for the command that deletes all selected MonitoringUnitIds.</comment>
+  </data>
+  <data name="MeasurementViewModel_Exception_Cannot_Update" xml:space="preserve">
+    <value>Cannot update this measurement because validation errors exist.</value>
+    <comment>Only valid measurements can be saved.</comment>
+  </data>
+  <data name="Measurement_Invalid_Size" xml:space="preserve">
+    <value>Size must be &gt; 0</value>
+    <comment>Size must be greater than 0 if HasSize is true.</comment>
+  </data>
+  <data name="Model_Exception_Cannot_Update" xml:space="preserve">
+    <value>Cannot save this model's value because validation errors exist.</value>
+    <comment>Only valid models can be saved.</comment>
+  </data>
+  <data name="MonitoringUnitMeasurementViewModel_Command_CreateNewMeasurement" xml:space="preserve">
+    <value>New Measurement</value>
+    <comment>Display text for command creating a new Dosimenter Measurement.</comment>
+  </data>
+  <data name="MonitoringUnitMeasurementViewModel_Command_DeleteMeasurements" xml:space="preserve">
+    <value>Delete Selected Measurements</value>
+    <comment>Display text for command deleting selected Dosimeter Measurements.</comment>
+  </data>
+  <data name="MonitoringUnitViewModel_Command_CreateNewComment" xml:space="preserve">
+    <value>New Comment</value>
+    <comment>Display text for command creating a new Comment.</comment>
+  </data>
+  <data name="MonitoringUnitViewModel_Command_DeleteSelectedComments" xml:space="preserve">
+    <value>Delete Selected Comments</value>
+    <comment>Display text for command deleting selected Comments.</comment>
+  </data>
+  <data name="MonitoringUnitViewModel_Exception_Cannot_Save" xml:space="preserve">
+    <value>Cannot save this monitoring unit because validation errors exist.</value>
+    <comment>Only valid monitoring units can be saved.</comment>
+  </data>
+  <data name="PpeLayer_Exception_Cannot_Update" xml:space="preserve">
+    <value>Cannot update this PPE Layer because validation errors exist.</value>
+    <comment>Only valid PPE Layers can be saved.</comment>
+  </data>
+  <data name="SelectableViewModel_Exception_Cannot_Save" xml:space="preserve">
+    <value>Cannot save this {0} because validation errors exist.</value>
+    <comment>Only valid view models can be saved.</comment>
+  </data>
+  <data name="StaticItemModel_Invalid_Desc" xml:space="preserve">
+    <value>Must be provided, and be unique within this group.</value>
+    <comment>Descriptions must be provided and must be unique within a group.</comment>
+  </data>
+  <data name="StaticItemModel_Invalid_Description" xml:space="preserve">
+    <value>Description must be provided and unique within a Group.</value>
+    <comment>Required value.  Must be unique within the StaticValues.Groups.Group table.</comment>
+  </data>
+  <data name="StaticItemModel_Invalid_GroupId" xml:space="preserve">
+    <value>Must be a valid Group for Static Items.</value>
+    <comment>Must match an enumerated value in StaticValues.Groups.</comment>
+  </data>
+  <data name="StaticItemModel_Invalid_ItemId" xml:space="preserve">
+    <value>Must be unique within this group.</value>
+    <comment>Usually set to highest current value +1.</comment>
+  </data>
+  <data name="StaticTableModel_Invalid_Group" xml:space="preserve">
+    <value>Must be a valid Group for Static Items.</value>
+    <comment>Must match an enumerated value in StaticValues.Groups.</comment>
+  </data>
+  <data name="StudyViewModel_Command_Create_FieldFortification" xml:space="preserve">
+    <value>New Field Fortification</value>
+    <comment>Display text for command creating a new Field Fortification.</comment>
+  </data>
+  <data name="StudyViewModel_Command_Create_MonitoringUnit" xml:space="preserve">
+    <value>New Monitoring Unit</value>
+    <comment>Display text for command creating a new Monitoring Unit.</comment>
+  </data>
+  <data name="StudyViewModel_Command_Delete_Selected_FieldFortifications" xml:space="preserve">
+    <value>Delete Selected Field Fortifications</value>
+    <comment>Display text for command deleting selected Field Fortifications.</comment>
+  </data>
+  <data name="StudyViewModel_Command_Delete_Selected_MonitoringUnits" xml:space="preserve">
+    <value>Delete Selected Monitoring Units</value>
+    <comment>Display text for command deleting selected Monitoring Units</comment>
+  </data>
+  <data name="AhedViewModel_Command_AnalyticTools" xml:space="preserve">
+    <value>Analytic Tools</value>
+    <comment>Display text for command showing Analytic Tools View Model.</comment>
+  </data>
+  <data name="AhedViewModel_Command_DataReports" xml:space="preserve">
+    <value>Data Reports</value>
+    <comment>Display text for command showing Data Reports View Model.</comment>
+  </data>
+  <data name="AhedViewModel_Command_LocalDatabases" xml:space="preserve">
+    <value>Local Databases</value>
+    <comment>Display text for command showing and selecting local databases.</comment>
+  </data>
+  <data name="AhedViewModel_Command_ServerDatabases" xml:space="preserve">
+    <value>Server Databases</value>
+    <comment>Display text for command showing and selecting server databases.</comment>
   </data>
 </root>

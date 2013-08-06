@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace AHED.Types
 {
     [Serializable]
-    public class Volume
+    public class Volume : Quantity
     {
         public enum Units { Gallons, Liters };
 
@@ -12,9 +12,8 @@ namespace AHED.Types
         public double DU { get { return ToDisplayUnits(); } }
         public double Gal { get { return ToGallons(); } }
         public double L { get { return ToLiters(); } }
-        public bool HasValue { get { return OriginalValue.HasValue; } }
+        public bool HasValue { get { return Value.HasValue; } }
 
-        public double? OriginalValue { get; set; }
         public Units OriginalUnits { get; set; }
 
         public Volume()
@@ -23,23 +22,29 @@ namespace AHED.Types
 
         public Volume(Volume rhs)
         {
-            OriginalValue = rhs.OriginalValue;
+            if (rhs == null)
+            {
+                Value = null;
+                OriginalUnits = DisplayUnits;
+                return;
+            }
+
+            Value = rhs.Value;
             OriginalUnits = rhs.OriginalUnits;
         }
 
         public Volume(double value, Units units)
         {
-            OriginalValue = value;
+            Value = value;
             OriginalUnits = units;
         }
 
         public double ToDisplayUnits()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -48,11 +53,10 @@ namespace AHED.Types
 
         public double ToGallons()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -61,14 +65,33 @@ namespace AHED.Types
 
         public double ToLiters()
         {
-            if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
                 return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
             return value * Conversions[OriginalUnits][Units.Liters];
+        }
+
+        public override string UnitsString()
+        {
+            return OriginalUnits.ToString();
+        }
+
+        public static void TextAndUnits(Volume volume, out string volumeText, out Units volumeUnits)
+        {
+            if (volume == null)
+            {
+                volumeText = String.Empty;
+                volumeUnits = DisplayUnits;
+            }
+            else
+            {
+                volumeText = volume.Text;
+                volumeUnits = volume.OriginalUnits;
+            }
         }
 
         public static double Convert(double value, Units fromUnits, Units toUnits)
@@ -81,15 +104,15 @@ namespace AHED.Types
             if (!value.HasValue)
                 return Double.NaN;
 
-            return (double)value.OriginalValue * Conversions[value.OriginalUnits][toUnits];
+            return (double)value.Value * Conversions[value.OriginalUnits][toUnits];
         }
 
         // Takes the pounds and kilogram values from a data entry or spreadsheet import,
         // and chooses which is the original value
         public static Volume GallonsOrLiters(double? gallons, double? liters)
         {
-            bool gallonsNull = (gallons == null) || (!gallons.HasValue);
-            bool litersNull = (liters == null) || (!liters.HasValue);
+            bool gallonsNull = (gallons == null);
+            bool litersNull = (liters == null);
 
             // both are null, then so is the value
             if (gallonsNull && litersNull)
@@ -124,7 +147,7 @@ namespace AHED.Types
             DisplayUnits = Units.Gallons;
 
             // From Gallons to...
-            Dictionary<Units, double> tbl = new Dictionary<Units, double>();
+            var tbl = new Dictionary<Units, double>();
             tbl[Units.Gallons] = 1.0;
             tbl[Units.Liters] = 3.785411784;
             Conversions[Units.Gallons] = tbl;

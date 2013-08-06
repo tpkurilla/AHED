@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace AHED.Types
 {
     [Serializable]
-    public class Area
+    public class Area : Quantity
     {
         public enum Units { Acres, Hectares };
 
@@ -12,9 +12,8 @@ namespace AHED.Types
         public double DU { get { return ToDisplayUnits(); } }
         public double Acre { get { return ToAcres(); } }
         public double Hect { get { return ToHectares(); } }
-        public bool HasValue { get { return OriginalValue.HasValue; } }
+        public bool HasValue { get { return Value.HasValue; } }
 
-        public double? OriginalValue { get; set; }
         public Units OriginalUnits { get; set; }
 
         public Area()
@@ -23,23 +22,29 @@ namespace AHED.Types
 
         public Area(Area rhs)
         {
-            OriginalValue = rhs.OriginalValue;
+            if (rhs == null)
+            {
+                Value = null;
+                OriginalUnits = DisplayUnits;
+                return;
+            }
+
+            Value = rhs.Value;
             OriginalUnits = rhs.OriginalUnits;
         }
 
         public Area(double value, Units units)
         {
-            OriginalValue = value;
+            Value = value;
             OriginalUnits = units;
         }
 
         public double ToDisplayUnits()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -48,11 +53,10 @@ namespace AHED.Types
 
         public double ToAcres()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -61,14 +65,34 @@ namespace AHED.Types
 
         public double ToHectares()
         {
-            if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
                 return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
             return value * Conversions[OriginalUnits][Units.Hectares];
+        }
+
+        public override string UnitsString()
+        {
+            return OriginalUnits.ToString();
+        }
+
+        public static void TextAndUnits(Area area, out string areaText, out Units areaUnits)
+        {
+            if (area == null)
+            {
+                areaText = String.Empty;
+                areaUnits = DisplayUnits;
+            }
+            else
+            {
+                areaText = area.Text;
+                areaUnits = area.OriginalUnits;
+            }
+
         }
 
         public static double Convert(double value, Units fromUnits, Units toUnits)
@@ -78,18 +102,18 @@ namespace AHED.Types
 
         public static double Convert(Area value, Units toUnits)
         {
-            if (!value.HasValue)
+            if (value == null || !value.HasValue)
                 return Double.NaN;
 
-            return (double)value.OriginalValue * Conversions[value.OriginalUnits][toUnits];
+            return (double)value.Value * Conversions[value.OriginalUnits][toUnits];
         }
 
         // Takes the acres and hectares values from a data entry or spreadsheet import,
         // and chooses which is the original value
         public static Area AcresOrHectares(double? acres, double? hectares)
         {
-            bool acresNull = (acres == null) || (!acres.HasValue);
-            bool hectaresNull = (hectares == null) || (!hectares.HasValue);
+            bool acresNull = (acres == null);
+            bool hectaresNull = (hectares == null);
 
             // both are null, then so is the value
             if (acresNull && hectaresNull)
@@ -124,7 +148,7 @@ namespace AHED.Types
             DisplayUnits = Units.Acres;
 
             // From Acres to...
-            Dictionary<Units, double> tbl = new Dictionary<Units, double>();
+            var tbl = new Dictionary<Units, double>();
             tbl[Units.Acres] = 1.0;
             tbl[Units.Hectares] = 0.45359237;
             Conversions[Units.Acres] = tbl;

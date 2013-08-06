@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using AHED.Util;
@@ -25,7 +23,7 @@ namespace AHED.Types
     /// </para>
     /// </summary>
     [Serializable]
-    public class Database
+    public class Database : IDeepClone<Database>, IPropertyInitializer
     {
         /// <summary>
         /// Current version of the database.
@@ -38,19 +36,14 @@ namespace AHED.Types
         public string Description { get; set; }
 
         /// <summary>
-        /// The major version of this database.  e.g., the '2' in "2.0.1".
+        /// The major version of this database.  e.g., the '2' in "2.0".
         /// </summary>
         public int VersionMajor { get; set; }
 
         /// <summary>
-        /// The minor version of this database.  e.g., the '0' in "2.0.1".
+        /// The minor version of this database.  e.g., the '0' in "2.0".
         /// </summary>
         public int VersionMinor { get; set; }
-
-        /// <summary>
-        /// The build number of this database.  e.g., the '1' in "2.0.1".
-        /// </summary>
-        public int VersionBuild { get; set; }
 
         /// <summary>
         /// When this database was original created.
@@ -85,13 +78,54 @@ namespace AHED.Types
         /// <summary>
         /// Access control list for this database.
         /// </summary>
-        public List<AccessEntry> AccessList { get; set; }
+        public List<AccessEntry> AccessEntries { get; set; }
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public Database()
         {
+        }
+
+        public Database(Database database)
+        {
+            if (database == null)
+                throw new ArgumentNullException("database");
+
+            Description = database.Description;
+            VersionMajor = database.VersionMajor;
+            VersionMinor = database.VersionMinor;
+            DateCreated = database.DateCreated;
+            DateLastModified = database.DateLastModified;
+            StaticTable = new StaticTable(database.StaticTable.GetAll());
+            
+            Studies = (from study in database.Studies
+                       select new Study(study)
+                      ).ToList();
+
+            Status = database.Status;
+
+            Changes = (from change in database.Changes
+                       select new ChangeLogEntry(change)
+                      ).ToList();
+
+            AccessEntries = (from entry in database.AccessEntries
+                          select new AccessEntry(entry)
+                         ).ToList();
+        }
+
+        public bool InitializeProperties()
+        {
+            Description = String.Empty;
+            VersionMajor = SerializationVersion;
+            VersionMinor = 0;
+            Status = StaticValues.QaStatus.New;
+            StaticTable = new StaticTable();
+            Studies = new List<Study>();
+            Changes = new List<ChangeLogEntry>();
+            AccessEntries = new List<AccessEntry>();
+
+            return true;
         }
 
         /// <summary>
@@ -101,19 +135,8 @@ namespace AHED.Types
         {
             get
             {
-                var newDb = new Database()
-                    {
-                        Description = String.Empty,
-                        DateCreated = DateTime.Now,
-                        VersionMajor = SerializationVersion,
-                        VersionMinor = 0,
-                        Status = StaticValues.QaStatus.New,
-                        StaticTable = new StaticTable(),
-                        Studies = new List<Study>(),
-                        Changes = new List<ChangeLogEntry>(),
-                        AccessList = new List<AccessEntry>(),
-                    };
-
+                var newDb = new Database();
+                newDb.InitializeProperties();
                 newDb.DateLastModified = newDb.DateCreated;
 
                 var initialEntry = ChangeLogEntry.InitialEntry;
@@ -121,7 +144,7 @@ namespace AHED.Types
                 initialEntry.VersionMinor = newDb.VersionMinor;
                 newDb.Changes.Add(initialEntry);
 
-                // @todo: add AccessList entries here if needed.
+                // @todo: add AccessEntries entries here if needed.
 
                 return newDb;
             }
@@ -163,19 +186,6 @@ namespace AHED.Types
         /// </summary>
         private static Dictionary<int, XmlSerializer> _serializers;
 
-        private static void Initialize()
-        {
-            _databaseTypes = new Dictionary<int, Type>();
-            _databaseTypes[1] = typeof (Database);
-
-            _serializers = new Dictionary<int, XmlSerializer>();
-
-            foreach (KeyValuePair<int, Type> pair in _databaseTypes)
-            {
-                _serializers[pair.Key] = new XmlSerializer(pair.Value);
-            }
-        }
-
         /// <summary>
         /// Serializes a <c>Database</c> object using an XmlSerializer.  An <c>XDocument</c> is
         /// created with a <c>Version</c> element and a <c>Data</c> element.  The version is
@@ -189,7 +199,15 @@ namespace AHED.Types
         {
             if (_serializers == null)
             {
-                Initialize();
+                _databaseTypes = new Dictionary<int, Type>();
+                _databaseTypes[SerializationVersion] = typeof(Database);
+
+                _serializers = new Dictionary<int, XmlSerializer>();
+
+                foreach (KeyValuePair<int, Type> pair in _databaseTypes)
+                {
+                    _serializers[pair.Key] = new XmlSerializer(pair.Value);
+                }
             }
 
             // First, convert the database to a string
@@ -218,7 +236,7 @@ namespace AHED.Types
                 var serializer = _serializers[version];
 
                 XElement dataElement = doc.Elements().First(e => e.Name == "Data");
-                StringReader reader = new StringReader(dataElement.Value);
+                var reader = new StringReader(dataElement.Value);
                 object dbObject = serializer.Deserialize(reader);
                 db = dbObject.GetType().GetMethod("ToDatabase").Invoke(dbObject, parameters: null) as Database;
             }
@@ -231,5 +249,11 @@ namespace AHED.Types
         }
 
         #endregion Static Members
+
+
+        public Database DeepClone()
+        {
+            return new Database(this);
+        }
     }
 }

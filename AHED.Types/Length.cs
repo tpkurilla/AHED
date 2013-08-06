@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace AHED.Types
 {
     [Serializable]
-    public class Length
+    public class Length : Quantity
     {
         public enum Units { Feet, Inches, Centimeters, Meters };
 
@@ -17,9 +17,8 @@ namespace AHED.Types
         public double Ft { get { return ToFeet(); } }
         public double M { get { return ToMeters(); } }
         public double Cm { get { return ToCentimeters(); } }
-        public bool HasValue { get { return OriginalValue.HasValue; } }
+        public bool HasValue { get { return Value.HasValue; } }
 
-        public double? OriginalValue { get; set; }
         public Units OriginalUnits { get; set; }
 
         public Length()
@@ -28,23 +27,30 @@ namespace AHED.Types
 
         public Length(Length rhs)
         {
-            OriginalValue = rhs.OriginalValue;
+            if (rhs == null)
+            {
+                Value = null;
+                OriginalUnits = DuFtOrM;
+                return;
+            }
+
+            Value = rhs.Value;
             OriginalUnits = rhs.OriginalUnits;
         }
 
         public Length(double value, Units units)
         {
-            OriginalValue = value;
+            Value = value;
             OriginalUnits = units;
         }
 
         public double ToInOrCm()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
+                if (!Value.HasValue)
                     return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -53,11 +59,10 @@ namespace AHED.Types
 
         public double ToFtOrM()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -66,10 +71,10 @@ namespace AHED.Types
 
         public double ToInches()
         {
-            if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
                 return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -78,10 +83,10 @@ namespace AHED.Types
 
         public double ToCentimeters()
         {
-            if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
                 return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -90,11 +95,10 @@ namespace AHED.Types
 
         public double ToFeet()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -103,14 +107,49 @@ namespace AHED.Types
 
         public double ToMeters()
         {
-            if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
                 return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
             return value * Conversions[OriginalUnits][Units.Meters];
+        }
+
+        public override string UnitsString()
+        {
+            return OriginalUnits.ToString();
+        }
+
+        public static void InOrCmTextAndUnits(Length length, out string lengthText, out Units lengthUnits)
+        {
+            if (length == null)
+            {
+                lengthText = String.Empty;
+                lengthUnits = DuInOrCm;
+            }
+            else
+            {
+                lengthText = length.Text;
+                lengthUnits = length.OriginalUnits;
+            }
+
+        }
+
+        public static void FtOrMTextAndUnits(Length length, out string lengthText, out Units lengthUnits)
+        {
+            if (length == null)
+            {
+                lengthText = String.Empty;
+                lengthUnits = DuFtOrM;
+            }
+            else
+            {
+                lengthText = length.Text;
+                lengthUnits = length.OriginalUnits;
+            }
+
         }
 
         public static double Convert(double value, Units fromUnits, Units toUnits)
@@ -123,15 +162,15 @@ namespace AHED.Types
             if (!value.HasValue)
                 return Double.NaN;
 
-            return (double)value.OriginalValue * Conversions[value.OriginalUnits][toUnits];
+            return (double)value.Value * Conversions[value.OriginalUnits][toUnits];
         }
 
         // Takes the feet and meters values from a data entry or spreadsheet import,
         // and chooses which is the original value
         public static Length FeetOrMeters(double? feet, double? meters)
         {
-            bool feetNull = (feet == null) || (!feet.HasValue);
-            bool metersNull = (meters == null) || (!meters.HasValue);
+            bool feetNull = (feet == null);
+            bool metersNull = (meters == null);
 
             // both are null, then so is the value
             if (feetNull && metersNull)
@@ -156,8 +195,8 @@ namespace AHED.Types
         // and chooses which is the original value
         public static Length InchesOrCentimeters(double? inches, double? centimeters)
         {
-            bool inchesNull = (inches == null) || (!inches.HasValue);
-            bool centimetersNull = (centimeters == null) || (!centimeters.HasValue);
+            bool inchesNull = (inches == null);
+            bool centimetersNull = (centimeters == null);
 
             // both are null, then so is the value
             if (inchesNull && centimetersNull)
@@ -193,7 +232,7 @@ namespace AHED.Types
             DuFtOrM = Units.Feet;
 
             // From Feet to...
-            Dictionary<Units, double> tbl = new Dictionary<Units, double>();
+            var tbl = new Dictionary<Units, double>();
             tbl[Units.Feet] = 1.0;
             tbl[Units.Meters] = 0.3048;
             tbl[Units.Inches] = 12;

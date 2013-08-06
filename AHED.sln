@@ -9,6 +9,8 @@ Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "AhedModelingProject", "Ahed
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AHED", "AHED\AHED.csproj", "{BABD2C8B-C229-4606-91FB-83A9027CCF2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{94611B78-3ED3-4266-A5E9-9E51F72E6618}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{BABD2C8B-C229-4606-91FB-83A9027CCF2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BABD2C8B-C229-4606-91FB-83A9027CCF2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BABD2C8B-C229-4606-91FB-83A9027CCF2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94611B78-3ED3-4266-A5E9-9E51F72E6618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94611B78-3ED3-4266-A5E9-9E51F72E6618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94611B78-3ED3-4266-A5E9-9E51F72E6618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94611B78-3ED3-4266-A5E9-9E51F72E6618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

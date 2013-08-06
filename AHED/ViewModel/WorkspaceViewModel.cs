@@ -16,14 +16,6 @@ namespace AHED.ViewModel
 
         #endregion // Fields
 
-        #region Constructor
-
-        protected WorkspaceViewModel()
-        {
-        }
-
-        #endregion // Constructor
-
         #region CloseCommand
 
         /// <summary>
@@ -34,10 +26,8 @@ namespace AHED.ViewModel
         {
             get
             {
-                if (_closeCommand == null)
-                    _closeCommand = new RelayCommand(param => this.OnRequestClose());
-
-                return _closeCommand;
+                return _closeCommand
+                       ?? (_closeCommand = new RelayCommand(param => RaiseRequestClose()));
             }
         }
 
@@ -50,9 +40,9 @@ namespace AHED.ViewModel
         /// </summary>
         public event EventHandler RequestClose;
 
-        private void OnRequestClose()
+        private void RaiseRequestClose()
         {
-            EventHandler handler = this.RequestClose;
+            EventHandler handler = RequestClose;
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }

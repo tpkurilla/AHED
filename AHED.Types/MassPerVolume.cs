@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace AHED.Types
 {
     [Serializable]
-    public class MassPerVolume
+    public class MassPerVolume : Quantity
     {
         public enum Units { PoundsPerGallon, GramsPerLiter };
 
@@ -23,6 +23,13 @@ namespace AHED.Types
 
         public MassPerVolume(MassPerVolume rhs)
         {
+            if (rhs == null)
+            {
+                OriginalValue = null;
+                OriginalUnits = DisplayUnits;
+                return;
+            }
+
             OriginalValue = rhs.OriginalValue;
             OriginalUnits = rhs.OriginalUnits;
         }
@@ -36,8 +43,7 @@ namespace AHED.Types
         public double ToDisplayUnits()
         {
             if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+                return Double.NaN;
 
             double value = (double)OriginalValue;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
@@ -49,8 +55,7 @@ namespace AHED.Types
         public double ToPoundsPerGallon()
         {
             if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+                return Double.NaN;
 
             double value = (double)OriginalValue;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
@@ -71,6 +76,26 @@ namespace AHED.Types
             return value * Conversions[OriginalUnits][Units.GramsPerLiter];
         }
 
+        public override string UnitsString()
+        {
+            return OriginalUnits.ToString();
+        }
+
+        public static void TextAndUnits(MassPerVolume mass, out string massText, out Units massUnits)
+        {
+            if (mass == null)
+            {
+                massText = String.Empty;
+                massUnits = DisplayUnits;
+            }
+            else
+            {
+                massText = mass.Text;
+                massUnits = mass.OriginalUnits;
+            }
+
+        }
+
         public static double Convert(double value, Units fromUnits, Units toUnits)
         {
             return value * Conversions[fromUnits][toUnits];
@@ -88,8 +113,8 @@ namespace AHED.Types
         // and chooses which is the original value
         public static MassPerVolume PpgOrGpl(double? poundsPerGallon, double? gPerLiter)
         {
-            bool ppgNull = (poundsPerGallon == null) || (!poundsPerGallon.HasValue);
-            bool gplNull = (gPerLiter == null) || (!gPerLiter.HasValue);
+            bool ppgNull = (poundsPerGallon == null);
+            bool gplNull = (gPerLiter == null);
 
             // both are null, then so is the value
             if (ppgNull && gplNull)
@@ -124,7 +149,7 @@ namespace AHED.Types
             DisplayUnits = Units.PoundsPerGallon;
 
             // From Pounds/Gallon to...
-            Dictionary<Units, double> tbl = new Dictionary<Units, double>();
+            var tbl = new Dictionary<Units, double>();
             tbl[Units.PoundsPerGallon] = 1.0;
             tbl[Units.GramsPerLiter] = 2204.62262184878 / 3.785411784; // Lb/gal * g/Lb * gal/L
             Conversions[Units.PoundsPerGallon] = tbl;

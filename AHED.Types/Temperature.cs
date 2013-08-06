@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace AHED.Types
 {
     [Serializable]
-    public class Temperature
+    public class Temperature : Quantity
     {
         public enum Units { Fahrenheit, Celsius, Kelvin };
 
@@ -12,9 +12,8 @@ namespace AHED.Types
         public double DU { get { return ToDisplayUnits(); } }
         public double F { get { return ToFahrenheit(); } }
         public double C { get { return ToCelcius(); } }
-        public bool HasValue { get { return OriginalValue.HasValue; } }
+        public bool HasValue { get { return Value.HasValue; } }
 
-        public double? OriginalValue { get; set; }
         public Units OriginalUnits { get; set; }
 
         public Temperature()
@@ -23,23 +22,29 @@ namespace AHED.Types
 
         public Temperature(Temperature rhs)
         {
-            OriginalValue = rhs.OriginalValue;
+            if (rhs == null)
+            {
+                Value = null;
+                OriginalUnits = DisplayUnits;
+                return;
+            }
+
+            Value = rhs.Value;
             OriginalUnits = rhs.OriginalUnits;
         }
 
         public Temperature(double value, Units units)
         {
-            OriginalValue = value;
+            Value = value;
             OriginalUnits = units;
         }
 
         public double ToDisplayUnits()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -48,11 +53,10 @@ namespace AHED.Types
 
         public double ToFahrenheit()
         {
-            if (!OriginalValue.HasValue)
-                if (!OriginalValue.HasValue)
-                    return Double.NaN;
+            if (!Value.HasValue)
+                return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
@@ -61,14 +65,34 @@ namespace AHED.Types
 
         public double ToCelcius()
         {
-            if (!OriginalValue.HasValue)
+            if (!Value.HasValue)
                 return Double.NaN;
 
-            double value = (double)OriginalValue;
+            double value = (double)Value;
             if (Double.IsInfinity(value) || Double.IsNaN(value))
                 return value;
 
-            return Convert((double)OriginalValue, OriginalUnits, Units.Celsius);
+            return Convert((double)Value, OriginalUnits, Units.Celsius);
+        }
+
+        public override string UnitsString()
+        {
+            return OriginalUnits.ToString();
+        }
+
+        public static void TextAndUnits(Temperature temperature, out string temperatureText, out Units temperatureUnits)
+        {
+            if (temperature == null)
+            {
+                temperatureText = String.Empty;
+                temperatureUnits = DisplayUnits;
+            }
+            else
+            {
+                temperatureText = temperature.Text;
+                temperatureUnits = temperature.OriginalUnits;
+            }
+
         }
 
         public static double Convert(double value, Units fromUnits, Units toUnits)
@@ -115,7 +139,7 @@ namespace AHED.Types
             if (!value.HasValue)
                 return Double.NaN;
 
-            return Convert((double)value.OriginalValue, value.OriginalUnits, toUnits);
+            return Convert((double)value.Value, value.OriginalUnits, toUnits);
         }
 
         // Takes the Fahrenheit and Celsius values from a data entry or spreadsheet import,

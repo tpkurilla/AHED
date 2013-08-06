@@ -14,7 +14,7 @@ namespace AHED.ViewModel
                 throw new ArgumentNullException("command");
 
             base.DisplayName = displayName;
-            this.Command = command;
+            Command = command;
         }
 
         public ICommand Command { get; private set; }

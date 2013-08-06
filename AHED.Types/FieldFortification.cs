@@ -6,7 +6,7 @@ using System.Text;
 namespace AHED.Types
 {
     [Serializable]
-    public class FieldFortification
+    public class FieldFortification : IDeepClone<FieldFortification>, IPropertyInitializer
     {
         /// <summary>
         /// Event ID assigned by the Data Entry person.
@@ -16,7 +16,7 @@ namespace AHED.Types
         /// <summary>
         /// Must be a <c>StaticValues.DosimeterDescriptions</c> enumeration value specified
         /// in <c>StaticValues.DosimeterGroups.FieldFortification</c> list in
-        /// <c>StaticValues.DosimeterGroupLocations</c>.
+        /// <c>StaticValues.DosimeterGroupDescriptions</c>.
         /// </summary>
         public StaticItem DosimeterDescription { get; set; }
 
@@ -36,30 +36,65 @@ namespace AHED.Types
 
         public FieldFortification()
         {
-            EventId = "ID not set";
-            DosimeterDescription = null;
-            Entries = new List<Entry>();
-            MonitoringUnitIds = new List<MonitoringUnitId>();
         }
 
+        /// <summary>
+        /// Makes a deep copy of <c>fieldFortification</c>.
+        /// </summary>
+        /// <param name="fieldFortification">FieldFortification to copy.</param>
         public FieldFortification(FieldFortification fieldFortification)
         {
             EventId = fieldFortification.EventId;
             DosimeterDescription = fieldFortification.DosimeterDescription;
-            Entries = new List<Entry>(fieldFortification.Entries);
-            MonitoringUnitIds = new List<MonitoringUnitId>(fieldFortification.MonitoringUnitIds);
+            Entries = (from entry in fieldFortification.Entries
+                       select new Entry(entry)
+                      ).ToList();
+            MonitoringUnitIds = (from muId in fieldFortification.MonitoringUnitIds
+                                 select new MonitoringUnitId(muId)
+                                ).ToList();
         }
 
-        public FieldFortification(string eventId, StaticItem dosimeterDescription)
+        private static FieldFortification _template;
+
+        public static FieldFortification Create()
         {
-            EventId = eventId;
-            DosimeterDescription = dosimeterDescription;
+            if (_template == null)
+                CreateTemplate();
+
+            return new FieldFortification(_template);
+        }
+
+        public bool InitializeProperties()
+        {
+            if (_template == null)
+                CreateTemplate();
+
+            EventId = _template.EventId;
+            DosimeterDescription = _template.DosimeterDescription;
             Entries = new List<Entry>();
             MonitoringUnitIds = new List<MonitoringUnitId>();
+
+            return true;
+        }
+
+        private static void CreateTemplate()
+        {
+            _template = new FieldFortification()
+            {
+                EventId = String.Empty,
+                DosimeterDescription = StaticValues.Item(StaticValues.Groups.DosimeterDescriptions, (int)StaticValues.DosimeterDescriptions.NotSet),
+                Entries = new List<Entry>(),
+                MonitoringUnitIds = new List<MonitoringUnitId>()
+            };
+        }
+
+        FieldFortification IDeepClone<FieldFortification>.DeepClone()
+        {
+            return new FieldFortification(this);
         }
 
         [Serializable]
-        public struct Entry
+        public class Entry : IDeepClone<Entry>, IPropertyInitializer
         {
             /// <summary>
             /// Annotation meaningful to the Data Entry person.  e.g., "low", "mid", "high", etc.
@@ -69,12 +104,82 @@ namespace AHED.Types
             public double FortificationLevel { get; set; }
 
             public double FortificationAdjustment { get; set; }
+
+            public Entry(){}
+
+            public Entry(Entry entry)
+            {
+                Description = entry.Description;
+                FortificationLevel = entry.FortificationLevel;
+                FortificationAdjustment = entry.FortificationAdjustment;
+            }
+
+            private static Entry _entryTemplate;
+
+            public static Entry CreateFieldFortEntry()
+            {
+                if (_entryTemplate == null)
+                {
+                    _entryTemplate = new Entry()
+                        {
+                            Description = String.Empty,
+                            FortificationLevel = 0.0,
+                            FortificationAdjustment = 0.0
+                        };
+                }
+
+                return new Entry(_entryTemplate);
+            }
+
+            public bool InitializeProperties()
+            {
+                Description = String.Empty;
+                FortificationLevel = 0.0;
+                FortificationAdjustment = 0.0;
+
+                return true;
+            }
+
+            Entry IDeepClone<Entry>.DeepClone()
+            {
+                return new Entry(this);
+            }
         }
 
-        public struct MonitoringUnitId
+        public class MonitoringUnitId : IDeepClone<MonitoringUnitId>, IPropertyInitializer
         {
             public string WorkerId { get; set; }
             public string ReplicateId { get; set; }
+
+            public MonitoringUnitId(){}
+
+            public MonitoringUnitId(MonitoringUnitId muId)
+            {
+                WorkerId = muId.WorkerId;
+                ReplicateId = muId.ReplicateId;
+            }
+
+            public static MonitoringUnitId Create()
+            {
+                return new MonitoringUnitId()
+                    {
+                        WorkerId = String.Empty,
+                        ReplicateId = String.Empty
+                    };
+            }
+
+            public bool InitializeProperties()
+            {
+                WorkerId = String.Empty;
+                ReplicateId = String.Empty;
+
+                return true;
+            }
+
+            MonitoringUnitId IDeepClone<MonitoringUnitId>.DeepClone()
+            {
+                return new MonitoringUnitId(this);
+            }
         }
     }
 }
